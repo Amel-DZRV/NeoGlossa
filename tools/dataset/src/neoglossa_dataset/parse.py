@@ -108,13 +108,19 @@ def classify(lemma):
     return "other", bare
 
 
+# Number markers the source appends to the headword, in every spelling it
+# uses: '(Sg.)', '(Sing.)', '(Pl.)', '(pl.)'. They must come off the lemma or
+# they end up in the key and split one noun into several.
+_SINGULAR_ONLY = re.compile(r"\(\s*[Ss](?:g|ing)\.?\s*\)")
+_PLURAL_ONLY = re.compile(r"\(\s*[Pp]l\.?\s*\)")
+
+
 def parse_noun(lemma):
     """Split 'der Termin, -e' into gender, headword, plural, pattern, flags."""
     head = lemma
-    singular_only = False
-    if re.search(r"\(\s*[Ss]g\.?\s*\)", head):
-        singular_only = True
-        head = re.sub(r"\(\s*[Ss]g\.?\s*\)", "", head).strip()
+    singular_only = bool(_SINGULAR_ONLY.search(head))
+    plural_only = bool(_PLURAL_ONLY.search(head))
+    head = _PLURAL_ONLY.sub("", _SINGULAR_ONLY.sub("", head)).strip()
 
     marker = None
     if "," in head:
@@ -122,7 +128,9 @@ def parse_noun(lemma):
         head, marker = head.strip(), marker.strip()
 
     gender, _, word = head.partition(" ")
-    gender, word = gender.lower(), word.strip()
+    # Collapse any internal or trailing whitespace: 'der Wagen, – ' leaves a
+    # trailing space that would otherwise miss every dictionary lookup.
+    gender, word = gender.lower(), " ".join(word.split())
 
     plural = None
     pattern = None
@@ -139,6 +147,7 @@ def parse_noun(lemma):
         "plural": plural,
         "pluralPattern": pattern,
         "singularOnly": singular_only,
+        "pluralOnly": plural_only,
         "error": error,
     }
 
@@ -153,6 +162,7 @@ def _blank_entry(head, pos, cefr, source_line):
         "plural": "",
         "pluralPattern": "",
         "singularOnly": 0,
+        "pluralOnly": 0,
         "governedCase": "",
         "partizipII": "",
         "auxiliary": "",
@@ -176,6 +186,8 @@ def _ingest(row, lexemes, unparsed):
     entry = lexemes.get(key)
 
     if entry is not None and noun:
+        entry["singularOnly"] = entry["singularOnly"] or int(noun["singularOnly"])
+        entry["pluralOnly"] = entry["pluralOnly"] or int(noun["pluralOnly"])
         # Second sighting of a known noun: fill a gap, or record a genuine
         # disagreement for the Wiktionary cross-check to settle.
         if noun["plural"] and not entry["plural"]:
@@ -199,6 +211,7 @@ def _ingest(row, lexemes, unparsed):
                 plural=noun["plural"] or "",
                 pluralPattern=noun["pluralPattern"] or "",
                 singularOnly=int(noun["singularOnly"]),
+                pluralOnly=int(noun["pluralOnly"]),
             )
         elif pos == "preposition":
             entry["governedCase"] = PREPOSITIONS[head.lower()]

@@ -3,6 +3,7 @@ name = "neoglossa-dataset"
 version = "0.1.0"
 description = "Build-time tooling that produces NeoGlossa's read-only lexicon"
 requires-python = ">=3.11"
+dependencies = ["german-nouns>=1.2.5"]
 
 [build-system]
 requires = ["setuptools>=68"]
