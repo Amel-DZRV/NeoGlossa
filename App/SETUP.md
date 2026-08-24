@@ -42,14 +42,27 @@ Resources**. Without this the app traps on launch with "lexicon.sqlite is
 missing from the bundle", which is deliberate — a silent empty deck would be
 worse.
 
-## 5. Optional: the Archivo font
+## 5. Permissions for speech input
+
+In the target's **Info** tab add two keys, or dictation crashes on first use:
+
+| Key | Value |
+|---|---|
+| `NSMicrophoneUsageDescription` | Answer cards by speaking. |
+| `NSSpeechRecognitionUsageDescription` | Recognises German answers on device. |
+
+Recognition is on-device only (`requiresOnDeviceRecognition = true`), so the
+app still makes no network calls. iOS may need to download the German
+offline model once, under Settings → General → Keyboard → Dictation.
+
+## 6. Optional: the Archivo font
 
 The type scale asks for Archivo and falls back to the system face if it is
 absent, so this is optional. To add it: download the family from Google
 Fonts, drag the `.ttf` files in, and list them under `UIAppFonts` in the
 target's Info tab.
 
-## 6. Run
+## 7. Run
 
 Select your iPhone and run. On first launch the store is empty, so Start
 introduces the first batch of new cards and goes straight into a session.

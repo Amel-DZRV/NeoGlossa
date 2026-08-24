@@ -13,7 +13,19 @@ struct ReviewView: View {
     @State private var cardOpacity: Double = 1
     @State private var result: GradeResult?
     @State private var shownAt = Date()
+    @State private var speech = SpeechRecognizer()
+    @State private var explainer = Explainer()
+    @State private var showingExplanation = false
     @FocusState private var inputFocused: Bool
+
+    /// Only noun cards expect a spoken article, so only they get the
+    /// der/die/das fallback.
+    private var expectsArticle: Bool {
+        switch store.currentRecord?.type {
+        case .nounProduction, .nounPlural: true
+        default: false
+        }
+    }
 
     /// 560ms, fast off the mark with a long settle, so the flip reads as mass
     /// rather than a wipe.
@@ -110,6 +122,10 @@ struct ReviewView: View {
             }
             .frame(maxWidth: .infinity)
 
+            if explainer.isReady {
+                explanationSection(lexeme)
+            }
+
             if !lexeme.exampleDE.isEmpty {
                 VStack(alignment: .leading, spacing: 4) {
                     Text(lexeme.exampleDE)
@@ -167,8 +183,16 @@ struct ReviewView: View {
                     commit(.again)
                 }
             }
+        } else if case .articleMissing(let heard) = speech.outcome {
+            articleFallback(heard: heard)
         } else {
-            VStack(spacing: Theme.Space.xs) {
+            inputRow
+        }
+    }
+
+    private var inputRow: some View {
+        VStack(spacing: Theme.Space.xs) {
+            HStack(spacing: 0) {
                 TextField("", text: $typed, prompt: placeholderText)
                     .font(TypeScale.exampleDE)
                     .textInputAutocapitalization(.never)
@@ -177,15 +201,75 @@ struct ReviewView: View {
                     .focused($inputFocused)
                     .onSubmit(submit)
                     .padding(.horizontal, 12)
-                    .frame(height: Theme.Space.primaryActionHeight)
-                    .overlay(Rectangle().stroke(Theme.rule(scheme), lineWidth: 1))
 
-                PrimaryButton(
-                    title: "Submit",
-                    trailing: "↵",
-                    isEnabled: !typed.trimmingCharacters(in: .whitespaces).isEmpty,
-                    action: submit
-                )
+                Button(action: toggleListening) {
+                    Image(systemName: "mic")
+                        .font(.system(size: 20, weight: .medium))
+                        .frame(width: 52, height: Theme.Space.primaryActionHeight)
+                        .background(speech.state == .listening ? Theme.ink(scheme) : .clear)
+                        .foregroundStyle(
+                            speech.state == .listening ? Theme.bg(scheme) : Theme.ink2(scheme)
+                        )
+                }
+                .buttonStyle(.plain)
+                .accessibilityLabel("Speak the answer")
+            }
+            .frame(height: Theme.Space.primaryActionHeight)
+            .overlay(Rectangle().stroke(Theme.rule(scheme), lineWidth: 1))
+
+            Text(micHint)
+                .font(TypeScale.secondary)
+                .foregroundStyle(Theme.ink3(scheme))
+                .frame(maxWidth: .infinity, alignment: .leading)
+
+            PrimaryButton(
+                title: "Submit",
+                trailing: "↵",
+                isEnabled: !typed.trimmingCharacters(in: .whitespaces).isEmpty,
+                action: submit
+            )
+        }
+    }
+
+    private var micHint: String {
+        switch speech.state {
+        case .listening: speech.partial.isEmpty ? "Listening…" : speech.partial
+        default: "Speech is fine — the article can be tapped after."
+        }
+    }
+
+    /// The microphone heard the noun but not its article. That is not a miss,
+    /// so the card is not failed: the article is tapped instead, and the tap
+    /// is what gets graded.
+    private func articleFallback(heard: String) -> some View {
+        VStack(alignment: .leading, spacing: Theme.Space.s) {
+            HStack(spacing: 6) {
+                Text("heard").labelStyle(Theme.ink3(scheme))
+                Text(heard).font(TypeScale.secondary).foregroundStyle(Theme.ink(scheme))
+                Text("article missing").labelStyle(Theme.ink3(scheme))
+            }
+
+            HStack(spacing: Theme.Space.xs) {
+                ForEach(Gender.allCases, id: \.self) { gender in
+                    Button {
+                        speech.reset()
+                        typed = "\(gender.rawValue) \(heard)"
+                        submit()
+                    } label: {
+                        VStack(alignment: .leading, spacing: 4) {
+                            Text(gender.rawValue)
+                                .font(TypeScale.action)
+                                .foregroundStyle(gender.color(scheme))
+                            Text(String(gender.label.prefix(4)))
+                                .labelStyle(Theme.ink3(scheme))
+                        }
+                        .padding(.horizontal, 12)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .frame(height: Theme.Space.articleTargetHeight)
+                        .overlay(Rectangle().stroke(gender.color(scheme), lineWidth: 2))
+                    }
+                    .buttonStyle(.plain)
+                }
             }
         }
     }
@@ -200,11 +284,59 @@ struct ReviewView: View {
         return Text(text).foregroundStyle(Theme.ink3(scheme))
     }
 
+    /// Post-reveal explanation only. The model is never asked for a gender,
+    /// a plural, an auxiliary or a case — those come from the dataset and are
+    /// passed to it as given.
+    @ViewBuilder private func explanationSection(_ lexeme: Lexeme) -> some View {
+        if let text = explainer.text {
+            VStack(alignment: .leading, spacing: 4) {
+                Text("generated · may be wrong").labelStyle(Theme.ink3(scheme))
+                Text(text).font(TypeScale.secondary).foregroundStyle(Theme.ink2(scheme))
+            }
+        } else if explainer.isWorking {
+            Text("Thinking…").labelStyle(Theme.ink3(scheme))
+        } else {
+            Button("Why?") {
+                Task { await explainer.explain(lexeme: lexeme, question: "Why is it this form?") }
+            }
+            .font(TypeScale.secondary)
+            .foregroundStyle(Theme.ink3(scheme))
+        }
+    }
+
     // MARK: - Flow
+
+    private func toggleListening() {
+        guard let lexeme = store.currentLexeme, let record = store.currentRecord else { return }
+
+        if speech.state == .listening {
+            speech.stopAndGrade(expectsArticle: expectsArticle)
+            if case .transcript(let text) = speech.outcome {
+                typed = text
+                speech.reset()
+                submit()
+            }
+            return
+        }
+
+        inputFocused = false
+        Task {
+            guard await speech.requestAuthorisation() else { return }
+            // Bias the decoder toward the answer being drilled.
+            let expected = lexeme.expectedAnswers(for: record.type)
+            speech.reset()
+            speech.start(
+                contextualStrings: expected + expected.flatMap { $0.split(separator: " ").map(String.init) },
+                expectsArticle: expectsArticle
+            )
+        }
+    }
 
     private func beginCard() {
         typed = ""
         result = nil
+        speech.reset()
+        explainer.clear()
         flipped = false
         degrees = 0
         cardOpacity = 1

@@ -11,8 +11,27 @@ Source documents:
 - `Artikel - German vocab app.dc.html` + `_ds/modernist-*` — design canvas and Modernist
   design system (tokens, type scale, motion, gender colour system)
 
-> **Read §0 before starting.** The two documents disagree in five places. Those decisions
-> gate work in Phase 1 and Phase 4 and should be settled before that code is written.
+## Status
+
+All four phases are implemented.
+
+| Phase | State |
+|---|---|
+| 1 — Dataset | **Done.** `lexicon.sqlite`, 188 KB, 848 lexemes, 1,878 cards. |
+| 2 — Design system | **Done.** Tokens, gender colours with rule cues, type scale, components. |
+| 3 — Core engine | **Done.** FSRS-5, queue builder, grading, throttle, 40 tests. |
+| 4 — App | **Done.** Home, Review, Summary, speech input, on-device explanations. |
+
+Cut during planning, with the schema left able to accept them later: cognate
+flagging (1.5), the WordTreasury importer (1.9), the settings screen (4.6).
+
+**The Swift has never been compiled.** No toolchain is available in the build
+environment and swift.org is blocked by its network policy. The algorithms were
+validated by porting them to Python and running the same assertions — FSRS reproduces the
+reference intervals and every monotonicity invariant, and the queue holds sibling
+separation across session sizes 2 to 59 without losing cards — but syntax, SwiftUI view
+composition and the SwiftData model layer are unverified until the project is opened in
+Xcode. `App/SETUP.md` covers that.
 
 ---
 
@@ -630,7 +649,7 @@ the new front fades in.
 
 **Reduce Motion:** cross-fade the faces in 120 ms, no rotation.
 
-### 4.4 Speech input
+### 4.4 Speech input — **done**
 `SFSpeechRecognizer(locale: "de-DE")` with `requiresOnDeviceRecognition = true`. Pass the
 expected answer's article and lemma as `contextualStrings` to bias the decoder.
 
@@ -662,7 +681,7 @@ target daily minutes (45) and target retention (0.9). Both are one-line edits an
 rebuild, which for a personal debug build is faster than building a screen. Theme follows
 the system appearance.
 
-### 4.7 On-device LLM (Foundation Models)
+### 4.7 On-device LLM (Foundation Models) — **done**
 The on-device model is ~3B parameters. It will get `der`/`die`/`das` wrong often enough to
 matter, and that is precisely the content this app exists to teach.
 
@@ -673,9 +692,11 @@ error log into patterns.
 **Forbidden** — anywhere a mistake teaches something false: gender, plural, Partizip II,
 auxiliary, governed case. Every one of these comes from the bundled dataset. No exceptions.
 
-Enforce structurally: the LLM layer is given no API that can return a gender, a plural, an
-auxiliary or a case. It receives already-correct facts as context and may only produce
-prose.
+Enforced structurally in `Explainer`: no method returns a gender, plural, auxiliary or
+case. Each one takes a `Lexeme` and passes its verified facts *into* the prompt as given,
+so the model can only produce prose about them. Generated text always renders under a
+`generated · may be wrong` label, and the whole section is hidden when the model is
+unavailable.
 
 ---
 
