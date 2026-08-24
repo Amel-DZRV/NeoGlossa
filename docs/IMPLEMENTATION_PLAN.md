@@ -167,7 +167,10 @@ cross-check they get no plural card at all.
 - Missing from both → mark `unverified`, keep the Goethe value, no plural card.
 
 The spec's hand-review gate is dropped: nothing blocks on `conflicts.csv` being empty. The
-file exists to be consulted when a card looks wrong, not to be worked through up front.
+file exists to be consulted when a card looks wrong, not to be worked through up front — so
+it is **committed to the repository**, not left in a build directory. When a card feels off
+mid-session, it is one search away on GitHub from the phone, and it already says what the
+other source claimed. Columns: `lemma, field, goetheValue, wiktionaryValue, sourceLine`.
 
 **Done when:** the cross-check has run, plurals are filled where available, and
 `conflicts.csv` exists.
