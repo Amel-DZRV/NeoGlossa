@@ -175,12 +175,30 @@ other source claimed. Columns: `lemma, field, goetheValue, wiktionaryValue, sour
 **Done when:** the cross-check has run, plurals are filled where available, and
 `conflicts.csv` exists.
 
-### 1.4 English glosses
-Pull from the Wiktionary translations already in the kaikki extract. One to three words —
-long glosses make grading ambiguous. Genuinely distinct senses store multiple accepted
-answers; grading accepts any of them.
+### 1.4 English glosses — **light pass, no review gate**
 
-**Done when:** every lexeme has ≥1 gloss; multi-sense words carry all accepted answers.
+A gloss is the short English answer on the back of a recognition card: `der Tisch` →
+`table`. The word list's English column is a translated *sentence* ("The table is made of
+wood"), which cannot serve as an answer, so glosses come from the kaikki.org Wiktionary
+extract — the same download 1.3 already needs.
+
+Rules, applied mechanically:
+- Take the **first two senses**. Two rather than one because a single stored answer makes
+  a polysemous card ungradeable: `die Bank` stored as only `bench` marks a correct answer
+  of `bank` wrong, repeatedly, and the card never matures. The grader accepts any entry in
+  the array, so a second sense costs nothing.
+- **Cap each gloss at three words.** Longer glosses make grading ambiguous.
+- Strip parenthetical qualifiers, usage labels and leading articles.
+- Anything with **4+ senses** goes to `data/review/glosses_messy.csv` (committed, like
+  `conflicts.csv`) and ships with its first two senses anyway.
+- A lemma absent from Wiktionary goes to the same file and ships with **no recognition
+  card** rather than a guessed gloss.
+
+**No review gate.** The messy file is consulted when a card misbehaves, not worked through
+up front. Expected failure mode: a card occasionally marks a correct answer wrong; it is
+obvious in the moment and a one-row fix.
+
+**Done when:** every noun has a gloss array or is on the exception list.
 
 ### 1.5 Cognate flagging — **cut**
 
