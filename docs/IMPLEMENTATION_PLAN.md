@@ -33,8 +33,7 @@ below are settled, not open.
 Two gaps neither document covers, filled here:
 - **`nounPlural` card** has no artboard. Reuses the noun layout; prompt is `der Termin`,
   expected `die Termine`, the plural article always renders in the `die` colour.
-- **Settings screen** has no artboard. Built plain from Modernist components — it is not a
-  screen the user looks at twice.
+- **Settings screen** — cut entirely (4.6). Target minutes and retention are constants.
 
 ---
 
@@ -78,7 +77,7 @@ NeoGlossa/
 │   │   ├── App/                    # entry point, SwiftData container
 │   │   ├── Models/                 # SwiftData @Model types
 │   │   ├── DesignSystem/           # tokens, type scale, components
-│   │   ├── Screens/                # Home, Review, Summary, Settings
+│   │   ├── Screens/                # Home, Review, Summary
 │   │   ├── Speech/                 # SFSpeechRecognizer + fallback
 │   │   ├── Intelligence/           # Foundation Models, gated
 │   │   └── Resources/lexicon.sqlite
@@ -153,15 +152,25 @@ are flagged the same way. Every line that matches no known pattern is written to
 
 **Done when:** structured CSV emitted, unparsed-line count reported and reviewed.
 
-### 1.3 Cross-verify against Wiktionary
+### 1.3 Cross-verify against Wiktionary — **no review gate**
+
 Cross-check every noun's gender and plural against the kaikki.org German Wiktionary
-extract. Agreement → `verified`. Disagreement → `data/review/conflicts.csv`. Missing →
-`unverified`, keep the Goethe value.
+extract. This step is load-bearing for one reason above all: **218 of the 848 nouns carry
+no plural in the source** (`das Buch`, `das Auge`, `das Brot`, `das Datum`). Without the
+cross-check they get no plural card at all.
 
-**No auto-resolution.** The user reviews `conflicts.csv` by hand; expect under 50 rows.
+- Missing plural in source, present in Wiktionary → **fill it**.
+- Agreement → mark `verified`.
+- Disagreement → **auto-accept the Goethe value** and log the row to
+  `data/review/conflicts.csv`. Goethe is the exam board; it is usually right, and a wrong
+  card is cheap to fix once it shows up in the app.
+- Missing from both → mark `unverified`, keep the Goethe value, no plural card.
 
-**Done when:** `conflicts.csv` is reviewed and empty; every noun is `verified` or
-explicitly accepted.
+The spec's hand-review gate is dropped: nothing blocks on `conflicts.csv` being empty. The
+file exists to be consulted when a card looks wrong, not to be worked through up front.
+
+**Done when:** the cross-check has run, plurals are filled where available, and
+`conflicts.csv` exists.
 
 ### 1.4 English glosses
 Pull from the Wiktionary translations already in the kaikki extract. One to three words —
@@ -170,18 +179,25 @@ answers; grading accepts any of them.
 
 **Done when:** every lexeme has ≥1 gloss; multi-sense words carry all accepted answers.
 
-### 1.5 Cognate flagging
-Normalised Levenshtein distance between lemma and gloss below a threshold produces a
-candidate set, then **manual review of that set** — automatic flagging alone is not safe.
+### 1.5 Cognate flagging — **cut**
 
-Cognates ship with `nounRecognition` **suspended**; production still runs, because the
-user still does not know the article.
+The mechanism: flag words whose English meaning is transparent from the German form
+(`das Telefon` → telephone), suspend their `nounRecognition` card, and maintain a
+false-friend exception list so words that only *look* transparent (`das Gift` → poison,
+`bekommen` → to receive) keep both cards.
 
-A false-friend exception list overrides the flag and keeps both cards:
-`das Gift` (poison), `bekommen` (receive), `der Chef` (boss), `das Handy` (mobile phone),
-`sensibel` (sensitive), `eventuell` (possibly). Extend as found.
+Measured against the actual list, it does not earn its cost:
 
-**Done when:** cognate list manually reviewed; false-friend override applied.
+- Obvious cognates at A1/A2 amount to a handful — `der Test`, `das Telefon`, `die Bank`,
+  `die Familie`.
+- Of the classic false friends, **none are in the list**: `das Gift`, `das Handy`,
+  `sensibel`, `eventuell`, `der Rat`, `die Art` are all absent. Only `der Chef` and
+  `bekommen` appear.
+
+So the whole apparatus — plus the manual review pass it needs to be safe — would suspend
+roughly a dozen cards. **Every `nounRecognition` card ships active.** `isCognate` and
+`isFalseFriend` stay in the schema as columns, defaulted to 0, so the feature can be
+switched on later without a migration.
 
 ### 1.6 Example sentences — **free from the source**
 
@@ -197,8 +213,8 @@ empty sentence or translation; those lexemes ship without an example rather than
 The back-of-card layout keeps the example block. No sentence is ever authored or generated
 on-device.
 
-**Done when:** every lexeme has an example or is explicitly on the 35-row exception list;
-a random sample of 50 is spot-checked.
+**Done when:** every lexeme has an example or is on the 35-row exception list. The spec's
+50-sentence spot check is dropped — the sentences come from the official PDFs.
 
 ### 1.7 Verbs and prepositions
 Irregular and separable verbs store `partizipII`, `auxiliary` (haben/sein),
@@ -389,8 +405,8 @@ live; the spec is explicit that the queue builder is the easiest thing to get wr
 
 ### 3.2 Card generation and unlock
 On first import of a lexeme:
-- Noun → `nounProduction` + `nounRecognition` (both new), plus `nounPlural` **locked**.
-  `nounRecognition` is created **suspended** when `isCognate == 1 && isFalseFriend == 0`.
+- Noun → `nounProduction` + `nounRecognition` (both new, both active — see 1.5), plus
+  `nounPlural` **locked**. A noun with no known plural gets no `nounPlural` card.
 - Irregular verb → `verbPartizip`
 - Preposition → `prepCase`
 
@@ -562,10 +578,12 @@ Headline reads `3 words missed`, sub-line `Only the misses are listed. 27 cards 
 Two actions: **Copy list** (markdown, per decision C4 — appends to the persistent error
 log and copies for Obsidian) and **Back to home**.
 
-### 4.6 Settings
-Target daily minutes (default 45), target retention (default 0.9), theme (dark/light),
-export full error log, and a debug section showing rolling average seconds-per-card and
-today's throttle computation.
+### 4.6 Settings — **cut**
+
+No settings screen. The two values that would have lived there are constants in code:
+target daily minutes (45) and target retention (0.9). Both are one-line edits and a
+rebuild, which for a personal debug build is faster than building a screen. Theme follows
+the system appearance.
 
 ### 4.7 On-device LLM (Foundation Models)
 The on-device model is ~3B parameters. It will get `der`/`die`/`das` wrong often enough to
@@ -618,9 +636,8 @@ Ships as executable tests, not a manual list.
 
 **Dataset (`tools/dataset/tests`)**
 - [ ] Plural derivation covers every pattern in §1.2, umlaut on the last vowel
-- [ ] `conflicts.csv` is empty at build time
+- [ ] All 218 plural-less nouns are either filled from Wiktionary or carry no plural card
 - [ ] Every lexeme has ≥1 gloss and an example sentence
-- [ ] Cognate recognition cards are suspended; false-friend ones are not
 - [ ] Row counts match the reviewed source CSV — nothing dropped
 
 **App**
