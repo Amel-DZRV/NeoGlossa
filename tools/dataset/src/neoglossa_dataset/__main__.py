@@ -10,7 +10,9 @@ import os
 import sys
 
 from .parse import build
+from .emit import emit
 from .glosses import attach, harvest_a1, harvest_a2, harvest_ding, read_index, write_index
+from .verbs import attach as attach_verbs, load_verbs
 from .verify import load_wiktionary, verify, write_conflicts
 
 HERE = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -121,6 +123,42 @@ def cmd_gloss(args):
     return 0
 
 
+def cmd_verbs(args):
+    rows = _load_lexemes(args.out)
+    index = load_verbs(args.verbs)
+    print(f"conjugation rows  {len(index)}")
+    filled, irregular, missing = attach_verbs(rows, index)
+    _save_lexemes(rows, args.out, ["praeteritum3sg", "isIrregular"])
+    print(f"verbs with PII    {filled}")
+    print(f"  irregular       {irregular} (get a verbPartizip card)")
+    print(f"  regular         {filled - irregular}")
+    print(f"unmatched         {len(missing)}")
+    return 0
+
+
+def cmd_emit(args):
+    rows = _load_lexemes(args.out)
+    counts = emit(rows, args.db)
+    size = os.path.getsize(args.db)
+    for table in ("lexeme", "noun_data", "verb_data", "prep_data"):
+        print(f"{table:<14} {counts[table]}")
+    print(f"skipped        {counts['skipped']} (pos 'other', no card type)")
+    print(f"size           {size / 1024:.0f} KB -> {args.db}")
+    return 0
+
+
+def cmd_all(args):
+    """Run the whole pipeline. harvest-glosses is deliberately excluded --
+    it reads the external clones, and its output is vendored."""
+    for step, fn in (
+        ("parse", cmd_parse), ("verify", cmd_verify), ("gloss", cmd_gloss),
+        ("verbs", cmd_verbs), ("emit", cmd_emit),
+    ):
+        print(f"\n=== {step} ===")
+        fn(args)
+    return 0
+
+
 def main(argv=None):
     parser = argparse.ArgumentParser(prog="neoglossa_dataset")
     sub = parser.add_subparsers(dest="cmd", required=True)
@@ -147,6 +185,24 @@ def main(argv=None):
     p.add_argument("--out", default=os.path.join(HERE, "data", "review"))
     p.add_argument("--index", default=os.path.join(HERE, "data", "raw", "glosses.csv"))
     p.set_defaults(func=cmd_gloss)
+
+    p = sub.add_parser("verbs", help="fill Partizip II, auxiliary and irregularity")
+    p.add_argument("--verbs", default=os.path.join(SC, "gvd", "output", "verbs.csv"))
+    p.add_argument("--out", default=os.path.join(HERE, "data", "review"))
+    p.set_defaults(func=cmd_verbs)
+
+    p = sub.add_parser("emit", help="write lexicon.sqlite")
+    p.add_argument("--out", default=os.path.join(HERE, "data", "review"))
+    p.add_argument("--db", default=os.path.join(HERE, "data", "lexicon.sqlite"))
+    p.set_defaults(func=cmd_emit)
+
+    p = sub.add_parser("all", help="run parse, verify, gloss, verbs and emit")
+    p.add_argument("--raw", default=os.path.join(HERE, "data", "raw"))
+    p.add_argument("--out", default=os.path.join(HERE, "data", "review"))
+    p.add_argument("--index", default=os.path.join(HERE, "data", "raw", "glosses.csv"))
+    p.add_argument("--verbs", default=os.path.join(HERE, "data", "raw", "verbs.csv"))
+    p.add_argument("--db", default=os.path.join(HERE, "data", "lexicon.sqlite"))
+    p.set_defaults(func=cmd_all)
 
     args = parser.parse_args(argv)
     return args.func(args)

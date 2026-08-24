@@ -173,6 +173,7 @@ def _blank_entry(head, pos, cefr, source_line):
         "auxiliary": "",
         "praesens3sg": "",
         "isSeparable": 0,
+        "isIrregular": 0,
         "exampleDE": "",
         "exampleEN": "",
         "sourceLine": source_line,

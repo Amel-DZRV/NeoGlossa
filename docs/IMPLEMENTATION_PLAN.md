@@ -265,7 +265,7 @@ on-device.
 **Done when:** every lexeme has an example or is on the 35-row exception list. The spec's
 50-sentence spot check is dropped — the sentences come from the official PDFs.
 
-### 1.7 Verbs and prepositions
+### 1.7 Verbs and prepositions — **done**
 Irregular and separable verbs store `partizipII`, `auxiliary` (haben/sein),
 `präteritum3sg`, `isSeparable`. The auxiliary is not optional — `gefahren` alone is
 useless; `ist` vs `hat` is what gets missed.
@@ -277,13 +277,23 @@ Prepositions store `governedCase`:
 - **Genitiv:** wegen, außerhalb — both confirmed present in the A1/A2 source (decision C2).
   `während`, `trotz` and `statt` are absent from the list and are not added.
 
-**Partly free from the source:** 59 rows already encode `hat` / `ist` + Partizip II as
-sub-entries (`abgeben(3) → hat abgegeben`), giving both the auxiliary and the participle
-directly. Extract these first; author only the remainder.
+**Sources.** 59 rows in the word list already encode `hat` / `ist` + Partizip II as
+sub-entries (`abgeben(3) → hat abgegeben`). The remainder comes from
+[`viorelsfetea/german-verbs-database`](https://github.com/viorelsfetea/german-verbs-database),
+a Wiktionary-derived conjugation table (Infinitive, Präteritum, Partizip II, Hilfsverb);
+the subset we need is vendored to `data/raw/verbs.csv`.
+
+**Irregularity is derived, not looked up.** A weak verb forms its Präteritum with `-te` and
+its Partizip II with `-t` (lieben, liebte, geliebt); anything breaking either half is strong
+or mixed. The test reads the Präteritum's *first token*, because a separable verb detaches
+its prefix (`holte ab`) and the naive test marks every separable weak verb irregular.
+
+**Result:** 182 of 203 verbs carry Partizip II and auxiliary. 68 are irregular and get a
+`verbPartizip` card. All 24 prepositions resolve to a governed case.
 
 **Done when:** both tables complete and verified.
 
-### 1.8 Emit `lexicon.sqlite`
+### 1.8 Emit `lexicon.sqlite` — **done**
 Read-only SQLite, well under 1 MB. Schema per the spec, with the C2 amendment:
 
 ```sql
@@ -321,11 +331,29 @@ CREATE TABLE prep_data (
 );
 ```
 
-Add indexes on `lexeme(pos, cefr)` and `lexeme(lemma)`. Ship it `VACUUM`ed and opened
-read-only from the app bundle.
+Emitted schema adds `word` (the lemma without its article, for lookups), `singularOnly` and
+`pluralOnly` on `noun_data`, and `CHECK` constraints on every enumerated column. Indexed on
+`lexeme(pos, cefr)` and `lexeme(word)`, `VACUUM`ed, opened read-only from the app bundle.
 
-**Done when:** file builds, opens, row counts match expectations, sample queries return
-correct data.
+Only card-bearing parts of speech are written. The word list's 628 `other` rows
+(adjectives, adverbs, function words) have no card type in v1 — adjective endings are out of
+scope — so they are skipped rather than shipped as dead rows.
+
+**Result — 188 KB, well under the 1 MB budget:**
+
+| Table | Rows |
+|---|---|
+| `lexeme` | 848 (621 noun, 203 verb, 24 preposition) |
+| `noun_data` | 621 |
+| `verb_data` | 182 |
+| `prep_data` | 24 |
+
+Cards this yields: 621 `nounProduction`, 617 `nounRecognition` (4 nouns have no gloss),
+548 `nounPlural`, 68 `verbPartizip`, 24 `prepCase` — **1,878 cards**.
+
+**Rebuild:** `python -m neoglossa_dataset all`. Every input is vendored, so it needs no
+network. `harvest-glosses` is the one step that reads the external clones, and is run only
+when the gloss sources change.
 
 ### 1.9 WordTreasury import — **no data to import; cut from scope**
 
