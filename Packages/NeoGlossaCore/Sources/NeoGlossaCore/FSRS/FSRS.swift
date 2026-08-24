@@ -168,8 +168,9 @@ public struct FSRS: Sendable {
         if state.state == .new {
             next.difficulty = initialDifficulty(rating)
             next.stability = initialStability(rating)
+            // A miss on a card's very first showing is not a lapse — there
+            // was no established memory to lose.
             next.state = rating == .again ? .learning : .review
-            if rating == .again { next.lapses += 0 }  // a first miss is not a lapse
         } else {
             let elapsed = state.lastReview.map {
                 max(now.timeIntervalSince($0) / 86_400, 0)

@@ -39,7 +39,12 @@ final class Explainer {
         #endif
     }
 
-    var isReady: Bool { if case .ready = availability { true } else { false } }
+    var isReady: Bool {
+        switch availability {
+        case .ready: true
+        case .unavailable: false
+        }
+    }
 
     /// Explain a revealed answer. Every fact the model needs is supplied.
     func explain(lexeme: Lexeme, question: String) async {

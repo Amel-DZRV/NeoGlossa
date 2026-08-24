@@ -183,7 +183,7 @@ struct ReviewView: View {
                     commit(.again)
                 }
             }
-        } else if case .articleMissing(let heard) = speech.outcome {
+        } else if case .articleMissing(let heard)? = speech.outcome {
             articleFallback(heard: heard)
         } else {
             inputRow
@@ -311,7 +311,7 @@ struct ReviewView: View {
 
         if speech.state == .listening {
             speech.stopAndGrade(expectsArticle: expectsArticle)
-            if case .transcript(let text) = speech.outcome {
+            if case .transcript(let text)? = speech.outcome {
                 typed = text
                 speech.reset()
                 submit()

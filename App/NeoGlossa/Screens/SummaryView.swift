@@ -1,5 +1,6 @@
 import SwiftUI
 import SwiftData
+import UIKit
 import NeoGlossaCore
 
 /// Only the misses. Not a summary of everything.
