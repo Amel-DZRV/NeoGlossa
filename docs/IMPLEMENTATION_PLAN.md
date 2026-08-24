@@ -262,10 +262,37 @@ read-only from the app bundle.
 **Done when:** file builds, opens, row counts match expectations, sample queries return
 correct data.
 
-### 1.9 WordTreasury import *(nice-to-have — does not block Phase 2)*
-One-time importer: match existing words by lemma, carry usable review history as an FSRS
-warm start, put words absent from the Goethe list into a `custom` table with the same
-schema shape.
+### 1.9 WordTreasury import — **no data to import; cut from scope**
+
+Inspected [`Amel-DZRV/WordTreasury`](https://github.com/Amel-DZRV/WordTreasury) (single
+commit, "Fully working in blue theme"). It is a working SwiftUI scaffold, not a populated
+vocabulary app:
+
+- `Resources/words.json` holds **10 seed entries** (5 nouns, 3 verbs, 2 adjectives) with
+  placeholder UUIDs `0000…0001`–`0010`. No gender field, no plural field.
+- Review history lives in **SwiftData on the device**, so none of it is in the repository.
+- `SRSEngine` is **SM-2** (interval / easeFactor / repetitions), which shares no state
+  variables with FSRS-5 — there is no stability or difficulty to carry over. Even with a
+  device export, a warm start would mean deriving FSRS state from SM-2 intervals, which is
+  an approximation with no accuracy guarantee.
+
+**Decision: cut the importer.** Ten words is a rounding error against 1,774, and NeoGlossa
+starts cold. Revisit only if a device export turns out to hold substantial real history.
+
+### 1.9a What WordTreasury *is* useful for — conventions, not data
+
+The repo is a better architectural reference than an import source, and NeoGlossa should
+match its conventions so the codebase feels familiar:
+
+- **`Features/<Screen>/<Screen>View.swift` + `<Screen>ViewManager.swift`**, the manager
+  marked `@Observable` and holding all derived state. NeoGlossa's `Screens/` follows this.
+- **`Models/` for SwiftData `@Model` types, `Services/` for logic.** NeoGlossa moves the
+  scheduler out to `NeoGlossaCore` instead, since SM-2-in-a-service is exactly what made
+  the engine untestable without the app target.
+- **`DesignTokens.swift`** with a `Color(hex:)` extension and a nested `enum` namespace —
+  reuse this shape verbatim for the Modernist tokens in Phase 2.1.
+- `SRSEngineTests.swift` has 6 tests. FSRS-5 in `NeoGlossaCore` should ship with
+  substantially more, including the reference vectors.
 
 ---
 
@@ -560,7 +587,7 @@ prose.
 3. **Phase 3** as a standalone package with unit tests. Test the queue builder and sibling
    burying properly.
 4. **Phase 4** on top.
-5. Phase 1.9 (WordTreasury import) last, if at all.
+5. ~~Phase 1.9 (WordTreasury import)~~ — cut; see 1.9.
 
 ---
 
