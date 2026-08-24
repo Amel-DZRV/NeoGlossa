@@ -18,17 +18,17 @@ Source documents:
 
 ## 0. Decisions
 
-The spec and the design canvas disagree in five places. **The spec is authoritative; the
-design governs only where the spec is silent** — tokens, the gender colour system, type
-scale, layout and motion detail. Resolutions below are settled, not open.
+The spec and the design canvas disagree in five places. Each was resolved individually;
+where the design reflects a later decision than the spec, the design wins. Resolutions
+below are settled, not open.
 
 | # | Conflict | Resolution |
 |---|---|---|
-| C1 | Preposition input — spec: three-button tap; design: text field | **Three-button tap** (spec). Akkusativ / Dativ / Wechsel / Genitiv as buttons. |
+| C1 | Preposition input — spec: three-button tap; design: text field | **Text field** (design). Typed like every other card; the accepted-answer array absorbs `dativ` / `dative` / `dat` / `+ dativ`. |
 | C2 | Governed cases — spec: akkusativ/dativ/wechsel; design shows Genitiv | **Add `genitiv`.** Verified against the source list: `wegen` and `außerhalb` are both present at A1/A2. |
-| C3 | A miss — spec: FSRS `Again`, gone for the day; design: re-enters the session 3 cards ahead | **FSRS `Again`** (spec). The card does not return in the same session, so the progress rail does not grow as you fail. |
+| C3 | A miss — spec: FSRS `Again`, gone for the day; design: re-enters the session 3 cards ahead | **Re-enters the session** (design), implemented as an FSRS relearning step. The card returns 3 positions ahead and the progress rail grows as you fail. |
 | C4 | Error-log export — spec: markdown for Obsidian; design: "copy plain text" | **Markdown** (spec). The Obsidian workflow is the stated reason the format matters. |
-| C5 | Flip timing — spec: ~0.4 s easeInOut; design: 560 ms cubic-bezier | **~0.4 s easeInOut** (spec). The design's non-conflicting motion detail is kept: one direction only, no flip-back, Reduce Motion cross-fade. |
+| C5 | Flip timing — spec: ~0.4 s easeInOut; design: 560 ms cubic-bezier | **560 ms cubic-bezier** (design) — the more specified of the two. |
 
 Two gaps neither document covers, filled here:
 - **`nounPlural` card** has no artboard. Reuses the noun layout; prompt is `der Termin`,
@@ -385,7 +385,7 @@ live; the spec is explicit that the queue builder is the easiest thing to get wr
 | `nounRecognition` | `der Termin` | "appointment" | Suspended for cognates |
 | `nounPlural` | `der Termin` | `die Termine` | Locked until parent matures |
 | `verbPartizip` | "to become" | `ist geworden` | Auxiliary required |
-| `prepCase` | "wegen" | `Genitiv` | Four-button tap (decision C1) |
+| `prepCase` | "wegen" | `Genitiv` | Typed, accepted-answer array (decision C1) |
 
 ### 3.2 Card generation and unlock
 On first import of a lexeme:
@@ -448,6 +448,9 @@ The answer is still in working memory. That is one long rep, not two.
 4. **Plural siblings are exempt.** `nounProduction` and `nounPlural` may appear close
    together — the plural depends on the gender, so the pair reinforces rather than leaks.
    Flag this by card type.
+5. **Same-card reinsertion is exempt** (decision C3): a missed card returns 3 positions
+   ahead in the same session. It is the same card, not a sibling, so the separation rule
+   does not apply to it.
 
 ```
 1. Collect due cards (excluding suspended and locked).
@@ -509,25 +512,25 @@ Kicker (`GOETHE A2`), then three stats and one action. Sparse by design.
 
 ### 4.3 Review screen
 Top: a **progress rail** of one bar per queued card (past = ink, current = ink2, upcoming =
-hair) with a `3 / 6` counter. The queue is fixed at session start; the rail does not grow
-(decision C3).
+hair) with a `3 / 6` counter. The rail grows as misses are reinserted (decision C3) — failing
+visibly lengthens the session, which is honest.
 
 **Front:** kind label (`noun` / `verb · past participle` / `preposition · case`), centred
-prompt, hint line (`article + noun`), then the input. Nouns and verbs get a text field with
-an inline mic button, a mic hint and Submit. **Prepositions get four case buttons instead**
-— Akkusativ / Dativ / Wechsel / Genitiv, at the same 96 pt target height as the article
-fallback (decision C1); the tap is the answer, so there is no Submit.
+prompt, hint line (`article + noun`), text field with inline mic button, mic hint, Submit.
+Prepositions use the same text field (decision C1), placeholder
+`akkusativ / dativ / wechsel / genitiv`.
 
 **Back:** verdict row (`✓ Correct` / `✕ Incorrect` plus the user's answer in quotes), the
 answer with the article colour-coded and rule-cued by gender, gender label
 (`masculine · der`), example DE with EN below, then the rating buttons — Hard / Good / Easy
 each showing its projected interval (`1 D` / `4 D` / `9 D`) when correct, a single
-full-width **Again** showing its relearning interval when wrong.
+full-width **Again** showing `3 cards from now` when wrong.
 
-**The flip:** Y axis, 0° → 180°, one direction only, ~0.4 s `.easeInOut` (decision C5).
-`rotation3DEffect(.degrees(deg), axis: (0, 1, 0), perspective: 0.28)` — the perspective
-value comes from the design and makes it read as 3D rather than a squash. No shadow, no
-scale bump, no bounce past 180°. Both faces pre-rendered so nothing pops.
+**The flip:** Y axis, 0° → 180°, one direction only. 560 ms `cubic-bezier(.22,.68,.16,1)`
+(decision C5) — fast off the mark, long settle, so it reads as mass rather than a wipe.
+`rotation3DEffect(.degrees(deg), axis: (0, 1, 0), perspective: 0.28)`, or
+`.interpolatingSpring(stiffness: 90, damping: 15)` for the spring feel. No shadow, no scale
+bump, no bounce past 180°. Both faces pre-rendered so nothing pops.
 
 Advancing does **not** flip back: the card fades out over 170 ms, the deck resets to 0°,
 the new front fades in.
@@ -549,11 +552,12 @@ wrong makes speech mode unusable, and it will be blamed on the recogniser.
 
 ### 4.5 Post-session screen
 Show **only the misses** — not a summary of everything. Per miss: prompt, correct answer
-with the gender colouring, and what the user gave (`you said "Termin"`). No example
+with the gender colouring, and what the user gave (`you said "Termin"`, plus
+`· second pass correct` when the reinserted card was later answered right). No example
 sentence here.
 
-Headline reads `3 words missed`, sub-line `Only the misses are listed. 24 cards seen.`
-Nothing missed → `Nothing missed`.
+Headline reads `3 words missed`, sub-line `Only the misses are listed. 27 cards seen,
+24 unique.` Nothing missed → `Nothing missed`.
 
 Two actions: **Copy list** (markdown, per decision C4 — appends to the persistent error
 log and copies for Obsidian) and **Back to home**.
@@ -599,7 +603,7 @@ Ships as executable tests, not a manual list.
 - [ ] Sibling burying: translation siblings never appear within 15 cards of each other
 - [ ] Introduction day: only one translation sibling appears
 - [ ] Plural siblings are exempt from burying
-- [ ] A missed card is rescheduled by FSRS and does not reappear in the same session
+- [ ] A missed card reappears 3 positions ahead and is exempt from sibling burying
 - [ ] Plural card stays locked until parent stability ≥ 21 days
 - [ ] Weekday shift: no card is ever due on a Saturday or Sunday
 - [ ] New cards are spread evenly, never front-loaded
