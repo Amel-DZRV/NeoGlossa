@@ -16,21 +16,25 @@ Source documents:
 
 ---
 
-## 0. Open conflicts between spec and design — decide before coding
+## 0. Decisions
 
-| # | Spec says | Design says | Impact | Recommendation |
-|---|---|---|---|---|
-| C1 | `prepCase` is a **three-button tap**, not typed (Task 2.1) | "Prepositions stay a text field, not case buttons"; demo accepts `genitiv`/`gen`/`+ genitiv` | Review screen + grading path | **Follow the design.** A text field keeps one input affordance across all card types and the accepted-answer array already handles the variants. Blocks Task 4.3. |
-| C2 | `governedCase` ∈ {akkusativ, dativ, wechsel} (Task 1.7) | Demo card `wegen` → **Genitiv** | Dataset schema + CHECK constraint | **Add `genitiv`** to the enum. `wegen`, `während`, `trotz`, `wegen` appear at A2. Blocks Task 1.7. |
-| C3 | A miss is graded `Again` and rescheduled by FSRS | "Again reinserts the card three positions ahead" — the miss re-enters the same session | Queue builder; interacts with sibling burying | **Follow the design**, implemented as FSRS relearning with a same-session learning step. Reinsertion is exempt from the 15-card separation rule (it is the *same* card, not a sibling). Blocks Task 3.5. |
-| C4 | Export the error log as **markdown** for Obsidian | Summary screen offers "Copy list · plain text" (tab-separated) | Post-session screen | **Ship both.** Copy button emits a markdown table; the design's "plain text" label becomes "markdown". One line of code, satisfies the stated Obsidian workflow. |
-| C5 | Flip ≈ 0.4 s `.easeInOut` | 560 ms `cubic-bezier(.22,.68,.16,1)`, perspective 0.28, no flip-back | Review screen animation | **Follow the design** — it is the more specified of the two. |
+The spec and the design canvas disagree in five places. **The spec is authoritative; the
+design governs only where the spec is silent** — tokens, the gender colour system, type
+scale, layout and motion detail. Resolutions below are settled, not open.
 
-Two further gaps the design does not cover and that this plan fills:
+| # | Conflict | Resolution |
+|---|---|---|
+| C1 | Preposition input — spec: three-button tap; design: text field | **Three-button tap** (spec). Akkusativ / Dativ / Wechsel / Genitiv as buttons. |
+| C2 | Governed cases — spec: akkusativ/dativ/wechsel; design shows Genitiv | **Add `genitiv`.** Verified against the source list: `wegen` and `außerhalb` are both present at A1/A2. |
+| C3 | A miss — spec: FSRS `Again`, gone for the day; design: re-enters the session 3 cards ahead | **FSRS `Again`** (spec). The card does not return in the same session, so the progress rail does not grow as you fail. |
+| C4 | Error-log export — spec: markdown for Obsidian; design: "copy plain text" | **Markdown** (spec). The Obsidian workflow is the stated reason the format matters. |
+| C5 | Flip timing — spec: ~0.4 s easeInOut; design: 560 ms cubic-bezier | **~0.4 s easeInOut** (spec). The design's non-conflicting motion detail is kept: one direction only, no flip-back, Reduce Motion cross-fade. |
+
+Two gaps neither document covers, filled here:
 - **`nounPlural` card** has no artboard. Reuses the noun layout; prompt is `der Termin`,
   expected `die Termine`, the plural article always renders in the `die` colour.
-- **Settings screen** has no artboard. Build it plain, from Modernist components
-  (`.field`, `.input`, `.seg`) — it is not a screen the user looks at twice.
+- **Settings screen** has no artboard. Built plain from Modernist components — it is not a
+  screen the user looks at twice.
 
 ---
 
@@ -94,13 +98,37 @@ single highest-leverage structural decision here.
 **The dataset is the project's risk. It ships complete and verified before any app code.**
 A verified CSV is useful on its own; a scheduler with no data is not.
 
-### 1.1 Acquire the word lists
-Search GitHub for parsed Goethe A1/A2 Wortlisten; evaluate quality before trusting any
-repo (spot-check 30 entries against the official PDF). Fallback: user supplies the
-official goethe.de PDFs, parse with `pdfplumber`.
+### 1.1 Acquire the word lists — **source selected**
 
-**Done when:** raw CSV of every A1 and A2 entry exists in `data/raw/`, each row carrying
-its original source line for audit.
+Source: [`ilkermeliksitki/goethe-institute-wordlist`](https://github.com/ilkermeliksitki/goethe-institute-wordlist)
+— TSV per level per initial letter, three columns: `lemma-with-article-and-plural`,
+`German example sentence`, `English translation`. It also bundles the official source PDFs
+(`pdf-files/a1.pdf`, `a2.pdf`), which are the audit trail for every parsed row.
+
+Measured coverage:
+
+| | A1 | A2 | Union |
+|---|---|---|---|
+| Rows | 1,694 | 2,022 | — |
+| Unique lemmas | 678 | 1,385 | **1,774** (289 shared) |
+| Nouns | — | — | **848** (572 with a plural marker) |
+| Rows missing sentence or translation | 0 | 35 | 35 |
+
+Known defects to handle in 1.2, not blockers:
+- **Two encodings for the umlaut plural.** Most rows use `¨-e` / `¨-er` / `¨-`, but some
+  spell the result instead — `die Mutter, -ü`, `die Tochter, -ö`. Parse both.
+- **276 nouns carry no plural marker.** Some are legitimately singular-only and marked
+  `(Sg.)`; the rest are gaps that Task 1.3 fills from Wiktionary.
+- **Inconsistent hyphens:** 19 rows use an en dash `–` for `-`; 44 use a bare `e` / `er`.
+- **Sub-entries** are suffixed `(2)`, `(3)` on the lemma and share a base word.
+- The repo's own README warns some words may be missing — row counts are reconciled
+  against the bundled PDFs before the list is accepted.
+
+*Licensing:* the Wortlisten are Goethe-Institut material. Fine for a single-user personal
+build; the dataset is not redistributed.
+
+**Done when:** row counts reconcile against the bundled PDFs and the raw TSVs are committed
+to `data/raw/` with source lines preserved.
 
 ### 1.2 Parse into structured rows
 Emit `lemma, pos, gender, plural, cefr, englishGloss, sourceLine`.
@@ -115,9 +143,13 @@ in the stem (`a→ä`, `o→ö`, `u→ü`, `au→äu`):
 | `das Mädchen, -` | `Mädchen` |
 | `die Brille, -n` | `Brillen` |
 
-Plural-only and singular-only entries are flagged and generate no plural card. Every line
-that matches no known pattern is written to `data/review/unparsed.log`. **Nothing is
-silently dropped.**
+The parser additionally normalises the source defects catalogued in 1.1: both umlaut
+encodings (`¨-e` and `-ü`), the en-dash-for-hyphen rows, bare `e`/`er` suffixes, and the
+`(2)`/`(3)` sub-entry suffixes, which collapse onto their base lemma.
+
+Entries marked `(Sg.)` are singular-only and generate no plural card; plural-only entries
+are flagged the same way. Every line that matches no known pattern is written to
+`data/review/unparsed.log`. **Nothing is silently dropped.**
 
 **Done when:** structured CSV emitted, unparsed-line count reported and reviewed.
 
@@ -151,15 +183,22 @@ A false-friend exception list overrides the flag and keeps both cards:
 
 **Done when:** cognate list manually reviewed; false-friend override applied.
 
-### 1.6 Example sentences
-One sentence per lexeme plus English translation. A1/A2 vocabulary only, under 10 words,
-target word in natural context. For nouns, prefer a **non-nominative** case — that is
-where article knowledge is actually exercised (`Ich habe den Schlüssel im Büro vergessen`).
+### 1.6 Example sentences — **free from the source**
 
-Sentences that must be authored are authored **at build time and reviewed**, never
-generated on-device.
+The word list ships one example sentence and an English translation per entry, taken from
+the official Goethe PDFs. They are level-appropriate by construction and cost nothing to
+include, so they stay in v1 — the reason to cut them was sourcing cost, and that cost is
+now zero.
 
-**Done when:** every lexeme has an example; a random sample of 50 is spot-checked.
+Handling: take the sentence from the **primary** entry only. Sub-entries reuse the field
+for conjugation forms (`abgeben(2) → gibt ab`) and are not sentences. 35 A2 rows have an
+empty sentence or translation; those lexemes ship without an example rather than blocking.
+
+The back-of-card layout keeps the example block. No sentence is ever authored or generated
+on-device.
+
+**Done when:** every lexeme has an example or is explicitly on the 35-row exception list;
+a random sample of 50 is spot-checked.
 
 ### 1.7 Verbs and prepositions
 Irregular and separable verbs store `partizipII`, `auxiliary` (haben/sein),
@@ -170,7 +209,12 @@ Prepositions store `governedCase`:
 - **Dativ:** mit, nach, bei, von, zu, aus, seit, gegenüber
 - **Akkusativ:** durch, für, gegen, ohne, um
 - **Wechsel:** in, an, auf, über, unter, neben, zwischen, vor, hinter
-- **Genitiv:** wegen, während, trotz *(per decision C2)*
+- **Genitiv:** wegen, außerhalb — both confirmed present in the A1/A2 source (decision C2).
+  `während`, `trotz` and `statt` are absent from the list and are not added.
+
+**Partly free from the source:** 59 rows already encode `hat` / `ist` + Partizip II as
+sub-entries (`abgeben(3) → hat abgegeben`), giving both the auxiliary and the participle
+directly. Extract these first; author only the remainder.
 
 **Done when:** both tables complete and verified.
 
@@ -314,7 +358,7 @@ live; the spec is explicit that the queue builder is the easiest thing to get wr
 | `nounRecognition` | `der Termin` | "appointment" | Suspended for cognates |
 | `nounPlural` | `der Termin` | `die Termine` | Locked until parent matures |
 | `verbPartizip` | "to become" | `ist geworden` | Auxiliary required |
-| `prepCase` | "wegen" | `Genitiv` | Typed (decision C1) |
+| `prepCase` | "wegen" | `Genitiv` | Four-button tap (decision C1) |
 
 ### 3.2 Card generation and unlock
 On first import of a lexeme:
@@ -377,8 +421,6 @@ The answer is still in working memory. That is one long rep, not two.
 4. **Plural siblings are exempt.** `nounProduction` and `nounPlural` may appear close
    together — the plural depends on the gender, so the pair reinforces rather than leaks.
    Flag this by card type.
-5. **Same-card reinsertion is exempt** (decision C3): a missed card returns three positions
-   ahead in the same session. It is the same card, not a sibling.
 
 ```
 1. Collect due cards (excluding suspended and locked).
@@ -440,22 +482,24 @@ Kicker (`GOETHE A2`), then three stats and one action. Sparse by design.
 
 ### 4.3 Review screen
 Top: a **progress rail** of one bar per queued card (past = ink, current = ink2, upcoming =
-hair) with a `3 / 6` counter. The rail grows as misses are reinserted — failing visibly
-lengthens the session, which is honest.
+hair) with a `3 / 6` counter. The queue is fixed at session start; the rail does not grow
+(decision C3).
 
 **Front:** kind label (`noun` / `verb · past participle` / `preposition · case`), centred
-prompt, hint line (`article + noun`), text field with inline mic button, mic hint, Submit.
+prompt, hint line (`article + noun`), then the input. Nouns and verbs get a text field with
+an inline mic button, a mic hint and Submit. **Prepositions get four case buttons instead**
+— Akkusativ / Dativ / Wechsel / Genitiv, at the same 96 pt target height as the article
+fallback (decision C1); the tap is the answer, so there is no Submit.
 
 **Back:** verdict row (`✓ Correct` / `✕ Incorrect` plus the user's answer in quotes), the
 answer with the article colour-coded and rule-cued by gender, gender label
 (`masculine · der`), example DE with EN below, then the rating buttons — Hard / Good / Easy
 each showing its projected interval (`1 D` / `4 D` / `9 D`) when correct, a single
-full-width **Again** showing `3 cards from now` when wrong.
+full-width **Again** showing its relearning interval when wrong.
 
-**The flip:** Y axis, 0° → 180°, one direction only. 560 ms `cubic-bezier(.22,.68,.16,1)` —
-fast off the mark, long settle, so it reads as mass rather than a wipe. In SwiftUI:
-`rotation3DEffect(.degrees(deg), axis: (0, 1, 0), perspective: 0.28)`, or
-`.interpolatingSpring(stiffness: 90, damping: 15)` for the spring feel. No shadow, no
+**The flip:** Y axis, 0° → 180°, one direction only, ~0.4 s `.easeInOut` (decision C5).
+`rotation3DEffect(.degrees(deg), axis: (0, 1, 0), perspective: 0.28)` — the perspective
+value comes from the design and makes it read as 3D rather than a squash. No shadow, no
 scale bump, no bounce past 180°. Both faces pre-rendered so nothing pops.
 
 Advancing does **not** flip back: the card fades out over 170 ms, the deck resets to 0°,
@@ -478,12 +522,11 @@ wrong makes speech mode unusable, and it will be blamed on the recogniser.
 
 ### 4.5 Post-session screen
 Show **only the misses** — not a summary of everything. Per miss: prompt, correct answer
-with the gender colouring, and what the user gave (`you said "Termin"`, plus
-`· second pass correct` when the reinserted card was later answered right). No example
+with the gender colouring, and what the user gave (`you said "Termin"`). No example
 sentence here.
 
-Headline reads `3 words missed`, sub-line `Only the misses are listed. 9 cards seen,
-6 unique.` Nothing missed → `Nothing missed`.
+Headline reads `3 words missed`, sub-line `Only the misses are listed. 24 cards seen.`
+Nothing missed → `Nothing missed`.
 
 Two actions: **Copy list** (markdown, per decision C4 — appends to the persistent error
 log and copies for Obsidian) and **Back to home**.
@@ -529,7 +572,7 @@ Ships as executable tests, not a manual list.
 - [ ] Sibling burying: translation siblings never appear within 15 cards of each other
 - [ ] Introduction day: only one translation sibling appears
 - [ ] Plural siblings are exempt from burying
-- [ ] Same-card reinsertion after a miss is exempt from burying
+- [ ] A missed card is rescheduled by FSRS and does not reappear in the same session
 - [ ] Plural card stays locked until parent stability ≥ 21 days
 - [ ] Weekday shift: no card is ever due on a Saturday or Sunday
 - [ ] New cards are spread evenly, never front-loaded
