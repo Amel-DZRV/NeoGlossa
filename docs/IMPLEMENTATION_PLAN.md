@@ -154,17 +154,30 @@ are flagged the same way. Every line that matches no known pattern is written to
 
 ### 1.3 Cross-verify against Wiktionary — **no review gate**
 
-Cross-check every noun's gender and plural against the kaikki.org German Wiktionary
-extract. This step is load-bearing for one reason above all: **218 of the 848 nouns carry
+Cross-check every noun's gender and plural against Wiktionary. **kaikki.org is blocked by
+the build environment's network policy**, so the source is the `german-nouns` PyPI package
+— the same Wiktionary-derived data, ~100k nouns with `genus` and `nominativ plural`. This
+step is load-bearing for one reason above all: **218 of the 848 nouns carry
 no plural in the source** (`das Buch`, `das Auge`, `das Brot`, `das Datum`). Without the
 cross-check they get no plural card at all.
 
+The two fields get **opposite** treatment, because their disagreements turned out to have
+opposite causes:
+
+- **Gender → keep Goethe.** Every disagreement observed is a homograph collision, where
+  Wiktionary's entry for the bare word is a different noun: `der Schild` (shield) against
+  `das Schild` (sign), `der Teil` against `das Teil`, `der Alte` against `das Alter`.
+- **Plural → take Wiktionary.** Every disagreement observed is this tool's own suffix
+  derivation failing on a Latin or Greek stem, where the ending is *replaced* rather than
+  appended: `Datum` → `Daten` not `Datumen`, `Praktikum` → `Praktika` not `Praktikuma`,
+  `Praxis` → `Praxen` not `Praxisen`. Wiktionary states the form rather than deriving it.
 - Missing plural in source, present in Wiktionary → **fill it**.
-- Agreement → mark `verified`.
-- Disagreement → **auto-accept the Goethe value** and log the row to
-  `data/review/conflicts.csv`. Goethe is the exam board; it is usually right, and a wrong
-  card is cheap to fix once it shows up in the app.
 - Missing from both → mark `unverified`, keep the Goethe value, no plural card.
+
+Both kinds of disagreement are recorded in `conflicts.csv` regardless of which side won.
+
+**Result:** 621 nouns — 615 verified, 6 unverified. 39 plurals filled, 21 corrected, 9 left
+without a plural (all genuine mass nouns).
 
 The spec's hand-review gate is dropped: nothing blocks on `conflicts.csv` being empty. The
 file exists to be consulted when a card looks wrong, not to be worked through up front — so
@@ -177,28 +190,43 @@ other source claimed. Columns: `lemma, field, goetheValue, wiktionaryValue, sour
 
 ### 1.4 English glosses — **light pass, no review gate**
 
-A gloss is the short English answer on the back of a recognition card: `der Tisch` →
-`table`. The word list's English column is a translated *sentence* ("The table is made of
-wood"), which cannot serve as an answer, so glosses come from the kaikki.org Wiktionary
-extract — the same download 1.3 already needs.
+A gloss is the short English answer on a recognition card: `der Tisch` → `table`. The word
+list's English column is a translated *sentence* and cannot serve as an answer.
+
+**Source (revised).** The plan originally named Wiktionary translations via kaikki.org,
+which is unreachable. Ding (TU Chemnitz, 412k entries) was evaluated as a replacement and
+**rejected as the primary source**: it is a translator's dictionary ordered alphabetically
+rather than by frequency, so its first entry is routinely obscure — its only bare
+`Alter {n}` line glosses it *antiqueness*, `Anfang` *commencement*, `Angebot` *quote*.
+
+Glosses instead come from two learner decks built from the same Goethe Wortlisten, which
+carry the sense a learner actually needs, with Ding as fallback for the remainder:
+
+| Source | Glosses |
+|---|---|
+| Goethe A1 Anki deck (`anki_german_a1_vocab`), column 4 | 451 |
+| Goethe A2 deck (`A2_Wortliste_Goethe`), `Wort_EN` field | 352 |
+| Ding `de-en.txt`, fallback only | 14 |
+| **Total** | **817 of 827** nouns and verbs |
 
 Rules, applied mechanically:
-- Take the **first two senses**. Two rather than one because a single stored answer makes
-  a polysemous card ungradeable: `die Bank` stored as only `bench` marks a correct answer
-  of `bank` wrong, repeatedly, and the card never matures. The grader accepts any entry in
-  the array, so a second sense costs nothing.
-- **Cap each gloss at three words.** Longer glosses make grading ambiguous.
-- Strip parenthetical qualifiers, usage labels and leading articles.
-- Anything with **4+ senses** goes to `data/review/glosses_messy.csv` (committed, like
-  `conflicts.csv`) and ships with its first two senses anyway.
-- A lemma absent from Wiktionary goes to the same file and ships with **no recognition
-  card** rather than a guessed gloss.
+- **First two senses**, because one stored answer makes a polysemous card ungradeable:
+  `die Bank` ships `["bank", "bench"]`, `der Termin` ships `["appointment", "meeting"]`.
+- **Cap three words**; drop parentheticals so `to be (switched) on` → `to be on`.
+- A slash inside a gloss separates two senses (`excuse / apology`), not one gloss.
+- Reject any gloss with no letters — the A1 deck writes `…` for phrase entries.
+- The 7 lemmas with no gloss go to `glosses_missing.csv` (committed) and ship with **no
+  recognition card** rather than a guessed answer.
 
-**No review gate.** The messy file is consulted when a card misbehaves, not worked through
-up front. Expected failure mode: a card occasionally marks a correct answer wrong; it is
-obvious in the moment and a one-row fix.
+**No review gate.** Consulted when a card misbehaves, not worked through up front.
 
-**Done when:** every noun has a gloss array or is on the exception list.
+Harvesting is separate from attaching: `harvest-glosses` reads the external sources once
+and writes a vendored subset to `data/raw/glosses.csv`; `gloss` reads only that. A rebuild
+needs no network and no clones.
+
+**Known wrinkle for Phase 3:** verb glosses are inconsistent about the infinitive marker
+(`to take off` alongside `move out`). Handle it in the grader by accepting a verb gloss
+with or without a leading `to `, rather than by editing the data.
 
 ### 1.5 Cognate flagging — **cut**
 

@@ -42,6 +42,10 @@ AUX_PARTICIPLE = re.compile(r"^(hat|ist)\s+([\wäöüßÄÖÜ]+)$")
 # Sub-entry field carrying a present-tense 3sg, e.g. "gibt ab" or "fährt".
 PRESENT_3SG = re.compile(r"^[a-zäöüß]+(\s+[a-zäöüß]+)?$")
 
+# Words that end like an infinitive but are not verbs. German infinitives end
+# in -en, or -ern/-eln, which these collide with.
+NOT_VERBS = {"gestern", "vorgestern", "modern"}
+
 SEPARABLE_PREFIXES = (
     "ab", "an", "auf", "aus", "bei", "ein", "fest", "her", "hin", "los", "mit",
     "nach", "vor", "weg", "zu", "zurück", "zusammen",
@@ -103,7 +107,8 @@ def classify(lemma):
     bare = re.sub(r"^\(sich\)\s*", "", lemma).strip()
     if bare.lower() in PREPOSITIONS:
         return "preposition", bare
-    if re.fullmatch(r"[a-zäöüß]+", bare.lower()) and bare.lower().endswith(("en", "ern", "eln")):
+    low = bare.lower()
+    if low not in NOT_VERBS and re.fullmatch(r"[a-zäöüß]+", low) and low.endswith(("en", "ern", "eln")):
         return "verb", bare
     return "other", bare
 

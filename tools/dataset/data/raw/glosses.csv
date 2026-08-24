@@ -1,0 +1,816 @@
+word,glosses,source
+Abfahrt,"[""departure""]",goethe-a2-deck
+Abflug,"[""departure""]",goethe-a1-deck
+Absender,"[""dispatcher""]",ding
+Adresse,"[""address""]",goethe-a2-deck
+Ahnung,"[""idea""]",goethe-a2-deck
+Alter,"[""age""]",goethe-a2-deck
+Ampel,"[""traffic light""]",goethe-a2-deck
+Anfang,"[""beginning""]",goethe-a2-deck
+Angebot,"[""offer""]",goethe-a2-deck
+Angst,"[""anxiety"", ""fear""]",goethe-a2-deck
+Ankunft,"[""arrival""]",goethe-a2-deck
+Anmeldung,"[""registration""]",goethe-a2-deck
+Anrede,"[""salutation""]",ding
+Anruf,"[""call""]",goethe-a2-deck
+Anrufbeantworter,"[""answering machine""]",goethe-a2-deck
+Ansage,"[""announcement""]",goethe-a1-deck
+Anschluss,"[""connection""]",goethe-a1-deck
+Antwort,"[""answer""]",goethe-a1-deck
+Anzeige,"[""advert"", ""display""]",goethe-a1-deck
+Anzug,"[""suit""]",goethe-a2-deck
+Apartment,"[""apartment""]",goethe-a1-deck
+Apfel,"[""apple""]",goethe-a1-deck
+Apotheke,"[""pharmacy""]",goethe-a2-deck
+Apparat,"[""device"", ""machine""]",goethe-a2-deck
+Appetit,"[""appetite""]",ding
+Arbeit,"[""work"", ""job""]",goethe-a1-deck
+Arbeitsplatz,"[""workplace""]",goethe-a1-deck
+Arm,"[""arm""]",goethe-a1-deck
+Artikel,"[""item""]",goethe-a2-deck
+Arzt,"[""doctor""]",goethe-a1-deck
+Aufzug,"[""lift"", ""elevator""]",goethe-a1-deck
+Auge,"[""eye""]",goethe-a1-deck
+Ausbildung,"[""education""]",goethe-a2-deck
+Ausflug,"[""excursion""]",goethe-a1-deck
+Ausgang,"[""exit""]",goethe-a1-deck
+Auskunft,"[""information"", ""details""]",goethe-a1-deck
+Ausland,"[""abroad"", ""overseas""]",goethe-a1-deck
+Ausländer,"[""foreigner""]",goethe-a1-deck
+Aussage,"[""statement""]",goethe-a1-deck
+Ausstellung,"[""exhibition""]",goethe-a2-deck
+Ausweis,"[""identity card"", ""id card""]",goethe-a1-deck
+Auto,"[""car"", ""automobile""]",goethe-a1-deck
+Autobahn,"[""motorway"", ""highway""]",goethe-a1-deck
+Automat,"[""machine"", ""automat""]",goethe-a1-deck
+Baby,"[""baby""]",goethe-a1-deck
+Babysitter,"[""baby-sitter""]",goethe-a2-deck
+Bad,"[""bathroom"", ""bath""]",goethe-a1-deck
+Bahn,"[""train""]",goethe-a1-deck
+Bahnhof,"[""train station"", ""railway station""]",goethe-a1-deck
+Bahnsteig,"[""platform""]",goethe-a1-deck
+Balkon,"[""balcony""]",goethe-a1-deck
+Ball,"[""ball""]",goethe-a2-deck
+Banane,"[""banana""]",goethe-a1-deck
+Band,"[""band""]",goethe-a2-deck
+Bank,"[""bank"", ""bench""]",goethe-a1-deck
+Basketball,"[""basketball""]",goethe-a2-deck
+Bauch,"[""stomach"", ""belly""]",goethe-a1-deck
+Baum,"[""tree""]",goethe-a1-deck
+Baustelle,"[""building site"", ""construction site""]",goethe-a2-deck
+Beamte,"[""official""]",goethe-a1-deck
+Bein,"[""leg""]",goethe-a1-deck
+Beispiel,"[""example""]",goethe-a1-deck
+Bekannte,"[""acquaintance""]",ding
+Berg,"[""mountain""]",goethe-a2-deck
+Beruf,"[""profession"", ""occupation""]",goethe-a1-deck
+Bescheid,"[""answer"", ""decision""]",goethe-a2-deck
+Besuch,"[""visit""]",goethe-a2-deck
+Bett,"[""bed""]",goethe-a1-deck
+Bewerbung,"[""application"", ""canditature""]",goethe-a2-deck
+Bibliothek,"[""library""]",goethe-a2-deck
+Bier,"[""beer""]",goethe-a1-deck
+Bild,"[""picture"", ""image""]",goethe-a1-deck
+Birne,"[""pear""]",goethe-a1-deck
+Bitte,"[""request"", ""appeal""]",goethe-a1-deck
+Blatt,"[""sheet""]",goethe-a2-deck
+Bleistift,"[""pencil""]",goethe-a1-deck
+Blick,"[""view""]",goethe-a1-deck
+Blog,"[""blog""]",goethe-a2-deck
+Blume,"[""flower""]",goethe-a1-deck
+Bluse,"[""blouse""]",goethe-a2-deck
+Bogen,"[""sheet""]",goethe-a1-deck
+Bohne,"[""bean""]",goethe-a2-deck
+Brief,"[""letter""]",goethe-a1-deck
+Briefmarke,"[""stamp""]",goethe-a1-deck
+Brille,"[""glasses""]",goethe-a2-deck
+Brot,"[""bread"", ""bread roll""]",goethe-a1-deck
+Bruder,"[""brother""]",goethe-a1-deck
+Brötchen,"[""bread roll"", ""bun""]",goethe-a1-deck
+Brücke,"[""bridge""]",goethe-a2-deck
+Buch,"[""book""]",goethe-a1-deck
+Buchstabe,"[""letter"", ""character""]",goethe-a1-deck
+Bus,"[""bus""]",goethe-a1-deck
+Butter,"[""butter""]",goethe-a1-deck
+Bäckerei,"[""bakery""]",goethe-a1-deck
+Büro,"[""office""]",goethe-a2-deck
+CD,"[""cd""]",goethe-a1-deck
+Cafeteria,"[""cafeteria""]",goethe-a2-deck
+Café,"[""cafe"", ""coffee shop""]",goethe-a1-deck
+Chef,"[""boss"", ""male boss""]",goethe-a1-deck
+Chefin,"[""female boss""]",goethe-a2-deck
+Club,"[""club""]",goethe-a2-deck
+Comic,"[""comic""]",goethe-a2-deck
+Computer,"[""computer""]",goethe-a1-deck
+Creme,"[""cream""]",goethe-a2-deck
+Dame,"[""lady""]",goethe-a1-deck
+Dank,"[""thanks""]",goethe-a1-deck
+Datei,"[""file""]",goethe-a2-deck
+Datum,"[""date""]",goethe-a1-deck
+Ding,"[""thing""]",goethe-a2-deck
+Disco,"[""disco""]",goethe-a1-deck
+Disko,"[""discotheque""]",ding
+Doktor,"[""doctor""]",goethe-a1-deck
+Doppelzimmer,"[""double room""]",goethe-a1-deck
+Dorf,"[""village""]",goethe-a1-deck
+Drucker,"[""printer""]",goethe-a1-deck
+Durchsage,"[""announcement""]",goethe-a1-deck
+Durst,"[""thirst""]",goethe-a1-deck
+Dusche,"[""shower""]",goethe-a1-deck
+E-Book,"[""e-book""]",goethe-a2-deck
+E-Mail,"[""email"", ""e-mail""]",goethe-a1-deck
+Ecke,"[""corner""]",goethe-a1-deck
+Ehefrau,"[""wife""]",goethe-a1-deck
+Ehemann,"[""husband""]",goethe-a1-deck
+Ei,"[""egg""]",goethe-a1-deck
+Eingang,"[""entrance""]",goethe-a1-deck
+Einkaufszentrum,"[""shopping mall""]",goethe-a2-deck
+Einladung,"[""invitation""]",goethe-a1-deck
+Eintritt,"[""entry""]",goethe-a1-deck
+Einzelzimmer,"[""single room""]",goethe-a1-deck
+Eis,"[""ice cream""]",goethe-a2-deck
+Empfänger,"[""recipient"", ""receiver""]",goethe-a1-deck
+Ende,"[""end"", ""the end""]",goethe-a1-deck
+Entschuldigung,"[""excuse"", ""apology""]",goethe-a2-deck
+Erdgeschoss,"[""ground floor""]",goethe-a2-deck
+Erfahrung,"[""experience""]",goethe-a2-deck
+Ergebnis,"[""result""]",goethe-a1-deck
+Erlaubnis,"[""permission""]",goethe-a2-deck
+Ermäßigung,"[""discount""]",goethe-a2-deck
+Erwachsene,"[""adult""]",goethe-a1-deck
+Essen,"[""food"", ""meal""]",goethe-a1-deck
+Fach,"[""subject""]",goethe-a2-deck
+Fahrer,"[""driver""]",goethe-a1-deck
+Fahrkarte,"[""ticket""]",goethe-a1-deck
+Fahrplan,"[""timetable""]",goethe-a2-deck
+Fahrrad,"[""bicycle""]",goethe-a1-deck
+Familie,"[""family""]",goethe-a1-deck
+Familienname,"[""surname"", ""family name""]",goethe-a1-deck
+Familienstand,"[""family"", ""marital status""]",goethe-a1-deck
+Fan,"[""fan""]",goethe-a2-deck
+Farbe,"[""colour""]",goethe-a1-deck
+Fax,"[""fax""]",goethe-a1-deck
+Fehler,"[""mistake"", ""error""]",goethe-a1-deck
+Feier,"[""celebration""]",goethe-a2-deck
+Fenster,"[""window""]",goethe-a2-deck
+Ferien,"[""vacation""]",goethe-a2-deck
+Fernseher,"[""tv""]",goethe-a2-deck
+Fest,"[""celebration"", ""feast""]",goethe-a2-deck
+Festival,"[""festival""]",goethe-a2-deck
+Feuer,"[""fire"", ""lighter""]",goethe-a1-deck
+Fieber,"[""fever""]",goethe-a1-deck
+Film,"[""film"", ""movie""]",goethe-a1-deck
+Firma,"[""company""]",goethe-a1-deck
+Fisch,"[""fish""]",goethe-a1-deck
+Flasche,"[""bottle""]",goethe-a1-deck
+Fleisch,"[""meat""]",goethe-a1-deck
+Flohmarkt,"[""flea market""]",goethe-a2-deck
+Flug,"[""flight""]",goethe-a2-deck
+Flughafen,"[""airport""]",goethe-a1-deck
+Flugzeug,"[""aeroplane"", ""plane""]",goethe-a1-deck
+Fluss,"[""river""]",goethe-a2-deck
+Formular,"[""form""]",goethe-a1-deck
+Foto,"[""photograph"", ""photo""]",goethe-a1-deck
+Fotoapparat,"[""camera""]",goethe-a2-deck
+Frage,"[""question""]",goethe-a1-deck
+Frau,"[""ms"", ""woman""]",goethe-a1-deck
+Freizeit,"[""free time"", ""leisure""]",goethe-a1-deck
+Freund,"[""friend"", ""friend, boyfriend""]",goethe-a1-deck
+Freundin,"[""friend"", ""girlfriend""]",goethe-a1-deck
+Frühstück,"[""breakfast""]",goethe-a1-deck
+Fundsachen,"[""lost property""]",goethe-a2-deck
+Fuß,"[""foot""]",goethe-a1-deck
+Fußball,"[""football"", ""soccer""]",goethe-a1-deck
+Führerschein,"[""driver's license""]",goethe-a2-deck
+Führung,"[""tour"", ""guidance""]",goethe-a1-deck
+Gabel,"[""fork""]",goethe-a2-deck
+Garage,"[""garage""]",goethe-a2-deck
+Garten,"[""garden""]",goethe-a1-deck
+Gast,"[""guest""]",goethe-a1-deck
+Geburtsjahr,"[""birth year"", ""year of birth""]",goethe-a1-deck
+Geburtsort,"[""birthplace"", ""place of birth""]",goethe-a1-deck
+Geburtstag,"[""birthday""]",goethe-a1-deck
+Gegenteil,"[""opposite""]",goethe-a2-deck
+Gehalt,"[""salary""]",goethe-a2-deck
+Geld,"[""money""]",goethe-a1-deck
+Geldbörse,"[""purse""]",goethe-a2-deck
+Gemüse,"[""vegetables""]",goethe-a1-deck
+Gepäck,"[""luggage""]",goethe-a1-deck
+Gericht,"[""dish""]",goethe-a2-deck
+Gerät,"[""device""]",goethe-a2-deck
+Geschenk,"[""present""]",goethe-a1-deck
+Geschichte,"[""story""]",goethe-a2-deck
+Geschirr,"[""dishes""]",goethe-a2-deck
+Geschäft,"[""shop"", ""business""]",goethe-a1-deck
+Gesicht,"[""face""]",goethe-a2-deck
+Gespräch,"[""conversation"", ""talk""]",goethe-a1-deck
+Gesundheit,"[""health""]",goethe-a2-deck
+Getränk,"[""drink""]",goethe-a1-deck
+Gewicht,"[""weight""]",goethe-a1-deck
+Gewitter,"[""thunderstorm""]",goethe-a2-deck
+Gitarre,"[""guitar""]",goethe-a2-deck
+Glas,"[""glass"", ""glasses""]",goethe-a1-deck
+Gleis,"[""platform"", ""track""]",goethe-a1-deck
+Glück,"[""luck"", ""happiness""]",goethe-a1-deck
+Glückwunsch,"[""congratulations"", ""congratulation""]",goethe-a1-deck
+Grippe,"[""flu""]",goethe-a2-deck
+Großeltern,"[""grandparents""]",ding
+Großmutter,"[""grandmother""]",goethe-a1-deck
+Großvater,"[""grandfather""]",goethe-a1-deck
+Gruppe,"[""group""]",goethe-a1-deck
+Gruß,"[""regards"", ""greeting""]",goethe-a1-deck
+Größe,"[""size""]",goethe-a1-deck
+Haar,"[""hair""]",goethe-a1-deck
+Halbpension,"[""half-board""]",goethe-a1-deck
+Halle,"[""hall""]",goethe-a1-deck
+Hals,"[""neck""]",goethe-a2-deck
+Haltestelle,"[""stop""]",goethe-a1-deck
+Hamburger,"[""hamburger""]",goethe-a2-deck
+Hand,"[""hand""]",goethe-a1-deck
+Handtuch,"[""towel""]",goethe-a2-deck
+Handy,"[""mobile telephone"", ""mobile""]",goethe-a1-deck
+Hauptstadt,"[""capital""]",goethe-a2-deck
+Haus,"[""house"", ""building""]",goethe-a1-deck
+Hausaufgabe,"[""homework""]",goethe-a1-deck
+Hausfrau,"[""housewife""]",goethe-a1-deck
+Haushalt,"[""household""]",goethe-a2-deck
+Hausmann,"[""househusband""]",goethe-a1-deck
+Heft,"[""notebook""]",goethe-a2-deck
+Heimat,"[""home"", ""homeland""]",goethe-a1-deck
+Heizung,"[""heater""]",goethe-a2-deck
+Hemd,"[""shirt""]",goethe-a2-deck
+Herd,"[""stove"", ""cooker""]",goethe-a1-deck
+Herr,"[""mister"", ""sir""]",goethe-a1-deck
+Hilfe,"[""help""]",goethe-a1-deck
+Himmel,"[""sky""]",goethe-a2-deck
+Hobby,"[""hobby""]",goethe-a1-deck
+Hochzeit,"[""marriage"", ""wedding""]",goethe-a1-deck
+Homepage,"[""homepage""]",goethe-a2-deck
+Hose,"[""trousers""]",goethe-a2-deck
+Hotel,"[""hotel""]",goethe-a1-deck
+Hund,"[""dog""]",goethe-a1-deck
+Hunger,"[""hunger""]",goethe-a1-deck
+Hähnchen,"[""chicken""]",goethe-a1-deck
+Idee,"[""idea""]",goethe-a2-deck
+Information,"[""information point"", ""information""]",goethe-a1-deck
+Insel,"[""island""]",goethe-a2-deck
+Instrument,"[""instrument""]",goethe-a2-deck
+Interesse,"[""interest""]",goethe-a2-deck
+Internet,"[""internet""]",goethe-a1-deck
+Interview,"[""interview""]",goethe-a2-deck
+Jacke,"[""jacket""]",goethe-a1-deck
+Jeans,"[""jeans""]",goethe-a2-deck
+Job,"[""job""]",goethe-a1-deck
+Jugendherberge,"[""youth hostel""]",goethe-a2-deck
+Jugendliche,"[""youth"", ""young person""]",goethe-a1-deck
+Junge,"[""boy""]",goethe-a1-deck
+Kaffee,"[""coffee""]",goethe-a1-deck
+Kalender,"[""calendar""]",goethe-a2-deck
+Kamera,"[""camera""]",goethe-a2-deck
+Karte,"[""card"", ""menu""]",goethe-a1-deck
+Kartoffel,"[""potato""]",goethe-a1-deck
+Kasse,"[""till"", ""cash register""]",goethe-a1-deck
+Katze,"[""cat""]",goethe-a2-deck
+Keller,"[""basement, cellar""]",goethe-a2-deck
+Kenntnisse,"[""expertise""]",goethe-a2-deck
+Kette,"[""chain""]",goethe-a2-deck
+Kind,"[""child""]",goethe-a1-deck
+Kindergarten,"[""kindergarten""]",goethe-a1-deck
+Kino,"[""cinema"", ""movie theater""]",goethe-a1-deck
+Kiosk,"[""kiosk""]",goethe-a1-deck
+Kirche,"[""church""]",goethe-a2-deck
+Klasse,"[""class""]",goethe-a1-deck
+Klavier,"[""piano""]",goethe-a2-deck
+Kleid,"[""dress""]",goethe-a2-deck
+Kleidung,"[""clothes"", ""cloths""]",goethe-a1-deck
+Koffer,"[""suitcase""]",goethe-a1-deck
+Kollege,"[""colleague"", ""male colleague""]",goethe-a1-deck
+Kollegin,"[""female colleague"", ""co-worker""]",goethe-a2-deck
+Kontakt,"[""contact""]",goethe-a2-deck
+Konto,"[""account""]",goethe-a1-deck
+Konzert,"[""concert""]",goethe-a2-deck
+Kopf,"[""head""]",goethe-a1-deck
+Kosmetik,"[""cosmetics""]",goethe-a2-deck
+Krankenhaus,"[""hospital""]",goethe-a2-deck
+Krankenkasse,"[""health insurance""]",goethe-a2-deck
+Krankheit,"[""illness""]",goethe-a2-deck
+Kredit,"[""credit""]",goethe-a2-deck
+Kreuzung,"[""crossing""]",goethe-a2-deck
+Krimi,"[""thriller""]",goethe-a2-deck
+Kuchen,"[""cake""]",goethe-a1-deck
+Kugelschreiber,"[""ball-point pen""]",goethe-a1-deck
+Kultur,"[""culture""]",goethe-a2-deck
+Kunde,"[""customer"", ""male customer""]",goethe-a1-deck
+Kundin,"[""female customer""]",goethe-a2-deck
+Kunst,"[""art""]",goethe-a2-deck
+Kurs,"[""course""]",goethe-a1-deck
+Käse,"[""cheese""]",goethe-a2-deck
+Körper,"[""body""]",goethe-a2-deck
+Küche,"[""kitchen""]",goethe-a1-deck
+Kühlschrank,"[""fridge""]",goethe-a1-deck
+Laden,"[""shop"", ""small shop""]",goethe-a1-deck
+Lampe,"[""lamp""]",goethe-a2-deck
+Land,"[""country""]",goethe-a1-deck
+Landschaft,"[""landscape""]",goethe-a2-deck
+Laptop,"[""laptop""]",goethe-a2-deck
+Leben,"[""life""]",goethe-a1-deck
+Lebensmittel,"[""foods"", ""groceries""]",goethe-a2-deck
+Lehrer,"[""teacher""]",goethe-a1-deck
+Leute,"[""people""]",goethe-a2-deck
+Licht,"[""light""]",goethe-a1-deck
+Lied,"[""song""]",goethe-a1-deck
+Link,"[""link""]",goethe-a2-deck
+Lkw,"[""hgv""]",goethe-a1-deck
+Lokal,"[""pub"", ""tavern""]",goethe-a1-deck
+Lust,"[""desire"", ""delight""]",goethe-a2-deck
+Löffel,"[""spoon""]",goethe-a2-deck
+Lösung,"[""solution""]",goethe-a1-deck
+Lüge,"[""lie""]",goethe-a2-deck
+Magen,"[""stomach""]",goethe-a2-deck
+Mailbox,"[""mailbox""]",goethe-a2-deck
+Mal,"[""time"", ""mark""]",goethe-a2-deck
+Mann,"[""man"", ""husband""]",goethe-a1-deck
+Mannschaft,"[""team""]",goethe-a2-deck
+Mantel,"[""coat""]",goethe-a2-deck
+Markt,"[""market""]",goethe-a2-deck
+Maschine,"[""machine""]",goethe-a1-deck
+Medikament,"[""drug""]",goethe-a2-deck
+Meer,"[""sea""]",goethe-a1-deck
+Meinung,"[""opinion""]",goethe-a2-deck
+Menge,"[""amount""]",goethe-a2-deck
+Mensch,"[""people"", ""human""]",goethe-a1-deck
+Messe,"[""fair""]",goethe-a2-deck
+Messer,"[""knife""]",goethe-a2-deck
+Miete,"[""rent"", ""rental fee""]",goethe-a1-deck
+Milch,"[""milk""]",goethe-a1-deck
+Mineralwasser,"[""mineral water""]",goethe-a2-deck
+Mitarbeiter,"[""employee""]",goethe-a2-deck
+Mittagessen,"[""lunch""]",goethe-a2-deck
+Mitte,"[""middle"", ""center""]",goethe-a1-deck
+Mittel,"[""medium""]",goethe-a2-deck
+Mobiltelefon,"[""mobile phone""]",goethe-a2-deck
+Mode,"[""fashion""]",goethe-a2-deck
+Moment,"[""moment""]",goethe-a1-deck
+Motor,"[""engine""]",goethe-a2-deck
+Motorroller,"[""scooter""]",goethe-a2-deck
+Mund,"[""mouth""]",goethe-a1-deck
+Museum,"[""museum""]",goethe-a2-deck
+Musik,"[""music""]",goethe-a2-deck
+Mutter,"[""mother""]",goethe-a1-deck
+Mädchen,"[""girl""]",goethe-a1-deck
+Möbel,"[""furniture""]",goethe-a2-deck
+Müll,"[""rubbish""]",goethe-a2-deck
+Mütze,"[""cap""]",goethe-a2-deck
+Nachbar,"[""male neighbor""]",goethe-a2-deck
+Nachricht,"[""message""]",goethe-a2-deck
+Name,"[""name""]",goethe-a1-deck
+Natur,"[""nature""]",goethe-a2-deck
+Note,"[""grade""]",goethe-a2-deck
+Notiz,"[""note""]",goethe-a2-deck
+Nudel,"[""noodle""]",goethe-a2-deck
+Nummer,"[""number""]",goethe-a1-deck
+Nähe,"[""proximity"", ""closeness""]",goethe-a2-deck
+Obst,"[""fruit""]",goethe-a1-deck
+Ohr,"[""ear""]",goethe-a2-deck
+Oma,"[""grandmother""]",goethe-a1-deck
+Opa,"[""grandfather""]",goethe-a1-deck
+Orange,"[""orange""]",goethe-a2-deck
+Ordnung,"[""order""]",goethe-a2-deck
+Ort,"[""location"", ""place""]",goethe-a1-deck
+Paar,"[""pair""]",goethe-a2-deck
+Paket,"[""package""]",goethe-a2-deck
+Papier,"[""paper""]",goethe-a1-deck
+Papiere,"[""papers, documents""]",goethe-a2-deck
+Parfüm,"[""perfume""]",goethe-a2-deck
+Park,"[""park""]",goethe-a2-deck
+Partner,"[""partner"", ""male partner""]",goethe-a1-deck
+Partnerin,"[""partner"", ""female partner""]",goethe-a1-deck
+Party,"[""party""]",goethe-a1-deck
+Pass,"[""passport""]",goethe-a1-deck
+Passwort,"[""password""]",goethe-a2-deck
+Pause,"[""break"", ""pause""]",goethe-a1-deck
+Person,"[""person""]",goethe-a2-deck
+Pferd,"[""horse""]",goethe-a2-deck
+Pflanze,"[""plant""]",goethe-a2-deck
+Pizza,"[""pizza""]",goethe-a2-deck
+Plakat,"[""poster""]",goethe-a2-deck
+Plan,"[""map"", ""plan""]",goethe-a1-deck
+Platz,"[""seat"", ""square""]",goethe-a1-deck
+Polizei,"[""police""]",goethe-a1-deck
+Pommes frites,"[""french fries""]",goethe-a2-deck
+Portion,"[""portion""]",goethe-a2-deck
+Post,"[""post office"", ""post""]",goethe-a1-deck
+Poster,"[""poster""]",goethe-a2-deck
+Postkarte,"[""postcard""]",goethe-a2-deck
+Postleitzahl,"[""postcode"", ""post code""]",goethe-a1-deck
+Praktikum,"[""internship""]",goethe-a1-deck
+Praxis,"[""practice""]",goethe-a1-deck
+Preis,"[""price""]",goethe-a1-deck
+Problem,"[""problem""]",goethe-a1-deck
+Produkt,"[""product""]",goethe-a2-deck
+Programm,"[""program""]",goethe-a2-deck
+Projekt,"[""project""]",goethe-a2-deck
+Prospekt,"[""brochure""]",goethe-a1-deck
+Prüfung,"[""examination"", ""exam""]",goethe-a1-deck
+Pullover,"[""pullover""]",goethe-a2-deck
+Qualität,"[""quality""]",goethe-a2-deck
+Quiz,"[""quiz""]",goethe-a2-deck
+Radio,"[""radio""]",goethe-a2-deck
+Rathaus,"[""town hall""]",goethe-a2-deck
+Raum,"[""room""]",goethe-a1-deck
+Rechnung,"[""bill""]",goethe-a1-deck
+Regen,"[""rain""]",goethe-a1-deck
+Reifen,"[""tire""]",goethe-a2-deck
+Reihe,"[""line"", ""row""]",goethe-a2-deck
+Reinigung,"[""cleaning""]",goethe-a2-deck
+Reis,"[""rice""]",goethe-a1-deck
+Reise,"[""journey"", ""trip""]",goethe-a1-deck
+Reisebüro,"[""travel agency""]",goethe-a1-deck
+Reiseführer,"[""travel guide"", ""tour guide""]",goethe-a1-deck
+Rentner,"[""male pensioner""]",goethe-a2-deck
+Rentnerin,"[""female pensioner""]",goethe-a2-deck
+Reparatur,"[""repair""]",goethe-a1-deck
+Rest,"[""rest""]",goethe-a2-deck
+Restaurant,"[""restaurant""]",goethe-a1-deck
+Rezept,"[""recipe""]",goethe-a2-deck
+Rezeption,"[""reception""]",goethe-a1-deck
+Rind,"[""beef""]",goethe-a2-deck
+Ring,"[""ring""]",goethe-a2-deck
+Rock,"[""skirt""]",goethe-a2-deck
+Rose,"[""rose""]",goethe-a2-deck
+Rucksack,"[""backpack""]",goethe-a2-deck
+Ruhe,"[""rest""]",goethe-a2-deck
+Rundgang,"[""round tour"", ""circut""]",goethe-a2-deck
+Rätsel,"[""mystery""]",goethe-a2-deck
+Rücken,"[""back""]",goethe-a2-deck
+S-Bahn,"[""commuter train""]",goethe-a1-deck
+Sache,"[""thing""]",goethe-a2-deck
+Saft,"[""juice""]",goethe-a1-deck
+Salat,"[""salad""]",goethe-a1-deck
+Salz,"[""salt""]",goethe-a1-deck
+Satz,"[""sentence""]",goethe-a1-deck
+Schalter,"[""counter"", ""switch""]",goethe-a1-deck
+Schere,"[""scissors""]",goethe-a2-deck
+Schiff,"[""ship""]",goethe-a2-deck
+Schild,"[""sign""]",goethe-a1-deck
+Schinken,"[""ham""]",goethe-a1-deck
+Schirm,"[""umbrella""]",goethe-a2-deck
+Schlafzimmer,"[""bedroom""]",goethe-a2-deck
+Schloss,"[""lock"", ""castle""]",goethe-a2-deck
+Schluss,"[""end"", ""ending""]",goethe-a1-deck
+Schlüssel,"[""key""]",goethe-a1-deck
+Schmerz,"[""pain""]",goethe-a2-deck
+Schnee,"[""snow""]",goethe-a2-deck
+Schokolade,"[""chocolate""]",goethe-a2-deck
+Schrank,"[""cupboard"", ""closet""]",goethe-a1-deck
+Schuh,"[""shoe""]",goethe-a1-deck
+Schule,"[""school""]",goethe-a1-deck
+Schwein,"[""pig""]",goethe-a2-deck
+Schwester,"[""sister""]",goethe-a1-deck
+Schwimmbad,"[""swimming pool"", ""pool""]",goethe-a1-deck
+Schüler,"[""pupil"", ""male student""]",goethe-a1-deck
+Schülerin,"[""female student"", ""pupil""]",goethe-a2-deck
+See,"[""lake""]",goethe-a1-deck
+Sehenswürdigkeit,"[""sights"", ""attractions""]",goethe-a1-deck
+Seife,"[""soap""]",goethe-a2-deck
+Seite,"[""page""]",goethe-a2-deck
+Sendung,"[""program"", ""show""]",goethe-a2-deck
+Service,"[""service""]",goethe-a2-deck
+Situation,"[""situation""]",goethe-a2-deck
+Ski,"[""ski""]",goethe-a2-deck
+Sofa,"[""sofa""]",goethe-a1-deck
+Sohn,"[""son""]",goethe-a1-deck
+Sonne,"[""sun""]",goethe-a1-deck
+Spaziergang,"[""walk""]",goethe-a2-deck
+Spaß,"[""fun""]",goethe-a2-deck
+Speisekarte,"[""menu""]",goethe-a1-deck
+Spiel,"[""game""]",goethe-a2-deck
+Sport,"[""sport""]",goethe-a1-deck
+Sportplatz,"[""sports ground""]",goethe-a2-deck
+Sprache,"[""language""]",goethe-a1-deck
+Sprechstunde,"[""consultation hour""]",goethe-a2-deck
+Stadt,"[""town"", ""city""]",goethe-a1-deck
+Stadtplan,"[""map"", ""city map""]",goethe-a2-deck
+Star,"[""star""]",goethe-a2-deck
+Stelle,"[""job"", ""position""]",goethe-a1-deck
+Stiefel,"[""boots""]",goethe-a2-deck
+Stift,"[""pen""]",goethe-a2-deck
+Stipendium,"[""scholarship""]",goethe-a2-deck
+Stock,"[""floor""]",goethe-a1-deck
+Stockwerk,"[""level"", ""floor""]",goethe-a2-deck
+Strand,"[""beach""]",goethe-a2-deck
+Straße,"[""street"", ""road""]",goethe-a1-deck
+Straßenbahn,"[""tram""]",goethe-a1-deck
+Stress,"[""stress""]",goethe-a2-deck
+Student,"[""student"", ""male student""]",goethe-a1-deck
+Studentin,"[""female student""]",goethe-a2-deck
+Studium,"[""degree course"", ""studies""]",goethe-a1-deck
+Stuhl,"[""chair""]",goethe-a2-deck
+Stunde,"[""hour""]",goethe-a1-deck
+Stück,"[""piece""]",goethe-a2-deck
+Supermarkt,"[""supermarket""]",goethe-a2-deck
+Suppe,"[""soup""]",goethe-a2-deck
+Süßigkeiten,"[""sweets""]",goethe-a2-deck
+T-Shirt,"[""t-shirt""]",goethe-a2-deck
+Tablet,"[""tablet""]",goethe-a2-deck
+Tablette,"[""pill"", ""tablet""]",goethe-a2-deck
+Tafel,"[""whiteboard""]",goethe-a2-deck
+Tasche,"[""bag""]",goethe-a1-deck
+Taschengeld,"[""pocket money""]",goethe-a2-deck
+Tasse,"[""cup""]",goethe-a2-deck
+Taxi,"[""taxi""]",goethe-a1-deck
+Team,"[""team""]",goethe-a2-deck
+Tee,"[""tea""]",goethe-a1-deck
+Teil,"[""part""]",goethe-a1-deck
+Telefon,"[""telephone"", ""phone""]",goethe-a1-deck
+Teller,"[""plate""]",goethe-a2-deck
+Tennis,"[""tennis""]",goethe-a2-deck
+Termin,"[""appointment"", ""meeting""]",goethe-a1-deck
+Test,"[""test""]",goethe-a1-deck
+Text,"[""text""]",goethe-a1-deck
+Theater,"[""theatre""]",goethe-a2-deck
+Thema,"[""topic"", ""subject""]",goethe-a1-deck
+Ticket,"[""ticket""]",goethe-a1-deck
+Tier,"[""animal""]",goethe-a2-deck
+Tipp,"[""tip""]",goethe-a2-deck
+Tisch,"[""table""]",goethe-a1-deck
+Titel,"[""title""]",goethe-a2-deck
+Tochter,"[""daughter""]",goethe-a1-deck
+Toilette,"[""toilet""]",goethe-a1-deck
+Tomate,"[""tomato""]",goethe-a1-deck
+Topf,"[""pot""]",goethe-a2-deck
+Torte,"[""cake""]",goethe-a2-deck
+Tour,"[""trip""]",goethe-a2-deck
+Tourist,"[""male tourist""]",goethe-a2-deck
+Touristin,"[""female tourist""]",goethe-a2-deck
+Training,"[""training""]",goethe-a2-deck
+Traum,"[""dream""]",goethe-a2-deck
+Treppe,"[""stairs"", ""stairway""]",goethe-a1-deck
+Tür,"[""door""]",goethe-a2-deck
+Uhr,"[""o'clock"", ""am""]",goethe-a1-deck
+Umzug,"[""move""]",goethe-a2-deck
+Unfall,"[""accident""]",goethe-a2-deck
+Universität,"[""university""]",goethe-a2-deck
+Unterkunft,"[""accommodation""]",goethe-a2-deck
+Unterricht,"[""class""]",goethe-a1-deck
+Unterschied,"[""difference""]",goethe-a2-deck
+Unterschrift,"[""signature""]",goethe-a1-deck
+Urlaub,"[""holiday"", ""vacation""]",goethe-a1-deck
+Vater,"[""father""]",goethe-a1-deck
+Veranstaltung,"[""event""]",goethe-a2-deck
+Verein,"[""club"", ""union""]",goethe-a1-deck
+Verkehr,"[""traffic""]",goethe-a2-deck
+Verkehrsmittel,"[""means of transport""]",goethe-a2-deck
+Verkäufer,"[""salesperson""]",goethe-a1-deck
+Vermieter,"[""landlord""]",goethe-a1-deck
+Verspätung,"[""delay""]",goethe-a2-deck
+Vertrag,"[""contract""]",goethe-a2-deck
+Verwandte,"[""relative""]",goethe-a1-deck
+Vogel,"[""bird""]",goethe-a2-deck
+Volleyball,"[""volleyball""]",goethe-a2-deck
+Vorname,"[""first name"", ""first given name""]",goethe-a1-deck
+Vorschlag,"[""suggestion""]",goethe-a2-deck
+Vorsicht,"[""attention""]",goethe-a1-deck
+Vorwahl,"[""area code""]",goethe-a1-deck
+Wagen,"[""car"", ""carriage""]",goethe-a2-deck
+Wald,"[""forest""]",goethe-a2-deck
+Wasser,"[""water""]",goethe-a1-deck
+Webseite,"[""website""]",goethe-a2-deck
+Weg,"[""path""]",goethe-a2-deck
+Wein,"[""wine""]",goethe-a1-deck
+Welt,"[""world""]",goethe-a1-deck
+Werkstatt,"[""workshop""]",goethe-a2-deck
+Wettbewerb,"[""competition""]",goethe-a2-deck
+Wetter,"[""weather""]",goethe-a1-deck
+Wiederhören,"[""goodbye""]",goethe-a2-deck
+Wiedersehen,"[""goodbye"", ""meet again""]",goethe-a2-deck
+Wind,"[""wind""]",goethe-a1-deck
+Witz,"[""joke""]",goethe-a2-deck
+Wohnung,"[""flat"", ""appartment""]",goethe-a1-deck
+Wohnzimmer,"[""living room""]",goethe-a2-deck
+Wolke,"[""cloud""]",goethe-a2-deck
+Workshop,"[""seminar"", ""workshop""]",goethe-a2-deck
+Wort,"[""word""]",goethe-a1-deck
+Wunsch,"[""wish""]",goethe-a2-deck
+Wurst,"[""sausage""]",goethe-a2-deck
+Wäsche,"[""cloths"", ""laundry""]",goethe-a2-deck
+Zahl,"[""number""]",goethe-a2-deck
+Zahn,"[""tooth""]",goethe-a2-deck
+Zeit,"[""time""]",goethe-a1-deck
+Zeitschrift,"[""magazine""]",goethe-a2-deck
+Zeitung,"[""newspaper""]",goethe-a1-deck
+Zelt,"[""tent""]",goethe-a2-deck
+Zentrum,"[""center""]",goethe-a2-deck
+Zettel,"[""note""]",goethe-a2-deck
+Zeugnis,"[""certificate"", ""school report""]",goethe-a2-deck
+Ziel,"[""aim"", ""target""]",goethe-a2-deck
+Zigarette,"[""cigarette""]",goethe-a1-deck
+Zimmer,"[""room""]",goethe-a1-deck
+Zirkus,"[""circus""]",goethe-a2-deck
+Zitrone,"[""lemon""]",goethe-a2-deck
+Zoll,"[""customs""]",goethe-a1-deck
+Zoo,"[""zoo""]",goethe-a2-deck
+Zucker,"[""sugar""]",goethe-a2-deck
+Zug,"[""train""]",goethe-a1-deck
+abfahren,"[""depart""]",goethe-a2-deck
+abfliegen,"[""to depart"", ""depart""]",goethe-a1-deck
+abgeben,"[""to give in"", ""to submit""]",goethe-a2-deck
+abholen,"[""pick up""]",goethe-a2-deck
+abschließen,"[""to consummate sth""]",ding
+anbieten,"[""to offer""]",goethe-a2-deck
+anfangen,"[""to begin""]",goethe-a2-deck
+ankommen,"[""arrive""]",goethe-a2-deck
+ankreuzen,"[""to tack""]",ding
+anmachen,"[""to turn on""]",goethe-a2-deck
+anmelden,"[""to declare""]",ding
+anrufen,"[""call""]",goethe-a2-deck
+ansehen,"[""look at""]",goethe-a2-deck
+antworten,"[""to answer"", ""reply""]",goethe-a1-deck
+anziehen,"[""to dress"", ""to put on""]",goethe-a2-deck
+arbeiten,"[""to work"", ""work""]",goethe-a1-deck
+aufhören,"[""to end"", ""stop""]",goethe-a1-deck
+aufmachen,"[""open""]",goethe-a2-deck
+aufpassen,"[""watch out""]",goethe-a2-deck
+aufräumen,"[""to clean up""]",goethe-a2-deck
+aufstehen,"[""to get up"", ""get up""]",goethe-a1-deck
+ausfüllen,"[""to fill out"", ""to fill""]",goethe-a1-deck
+ausgeben,"[""to spend""]",goethe-a2-deck
+ausgehen,"[""go out""]",goethe-a2-deck
+ausmachen,"[""to switch off"", ""to turn off""]",goethe-a1-deck
+auspacken,"[""unpacking""]",goethe-a2-deck
+aussehen,"[""to look"", ""to appear""]",goethe-a1-deck
+aussprechen,"[""pronounce""]",goethe-a2-deck
+aussteigen,"[""to alight"", ""get out""]",goethe-a1-deck
+austragen,"[""to deliver"", ""to carry out""]",goethe-a2-deck
+ausziehen,"[""to take off"", ""move out""]",goethe-a1-deck
+backen,"[""to bake""]",goethe-a2-deck
+baden,"[""to bathe""]",goethe-a1-deck
+basteln,"[""to tinker"", ""to do handicrafts""]",goethe-a2-deck
+bauen,"[""to build""]",goethe-a2-deck
+beantworten,"[""to answer""]",goethe-a2-deck
+bedeuten,"[""to mean"", ""mean""]",goethe-a1-deck
+beenden,"[""to end"", ""to finish""]",goethe-a2-deck
+beginnen,"[""to begin"", ""begin""]",goethe-a1-deck
+begründen,"[""justify""]",goethe-a2-deck
+bekommen,"[""to receive"", ""to have""]",goethe-a1-deck
+benutzen,"[""to use""]",goethe-a1-deck
+beraten,"[""to advise""]",goethe-a2-deck
+berichten,"[""to report""]",goethe-a2-deck
+beschreiben,"[""to describe""]",goethe-a2-deck
+besichtigen,"[""to visit""]",goethe-a1-deck
+bestehen,"[""consist""]",goethe-a2-deck
+bestellen,"[""to order""]",goethe-a1-deck
+bestätigen,"[""to confirm""]",goethe-a2-deck
+besuchen,"[""to visit""]",goethe-a1-deck
+bezahlen,"[""to pay""]",goethe-a1-deck
+bisschen,"[""little""]",goethe-a1-deck
+bitten,"[""to ask"", ""to ask for""]",goethe-a1-deck
+bleiben,"[""to stay""]",goethe-a1-deck
+braten,"[""to roast meat""]",goethe-a2-deck
+brauchen,"[""to need""]",goethe-a1-deck
+bringen,"[""to bring"", ""to take""]",goethe-a1-deck
+buchen,"[""to book""]",goethe-a2-deck
+buchstabieren,"[""to spell""]",goethe-a1-deck
+chatten,"[""to chat""]",goethe-a2-deck
+daneben,"[""next to it"", ""aside""]",goethe-a1-deck
+danken,"[""to thank""]",goethe-a1-deck
+dauern,"[""to take"", ""to last""]",goethe-a1-deck
+denken,"[""to think""]",goethe-a2-deck
+diskutieren,"[""to discuss""]",goethe-a2-deck
+draußen,"[""outside""]",goethe-a1-deck
+drinnen,"[""indoors""]",goethe-a2-deck
+drucken,"[""to print""]",goethe-a1-deck
+drüben,"[""over there""]",goethe-a2-deck
+drücken,"[""to press""]",goethe-a1-deck
+duschen,"[""to shower""]",ding
+dürfen,"[""to be allowed"", ""can""]",goethe-a1-deck
+einkaufen,"[""to go shopping"", ""to shop""]",goethe-a1-deck
+einladen,"[""to invite"", ""treat""]",goethe-a1-deck
+einpacken,"[""to wrap"", ""to pack""]",goethe-a2-deck
+einsteigen,"[""to get on"", ""to get in""]",goethe-a1-deck
+einziehen,"[""to move in""]",goethe-a2-deck
+empfehlen,"[""to recommend""]",goethe-a1-deck
+enden,"[""to end"", ""to end in""]",goethe-a1-deck
+entschuldigen,"[""to excuse""]",goethe-a1-deck
+erklären,"[""to explain""]",goethe-a1-deck
+erlauben,"[""allow"", ""to allow""]",goethe-a1-deck
+erreichen,"[""to reach""]",goethe-a2-deck
+erzählen,"[""to tell""]",goethe-a1-deck
+essen,"[""to eat""]",goethe-a1-deck
+fahren,"[""to travel"", ""to drive""]",goethe-a1-deck
+fehlen,"[""to be absent"", ""to be missing""]",goethe-a1-deck
+feiern,"[""to celebrate""]",goethe-a1-deck
+fernsehen,"[""to watch tv""]",goethe-a1-deck
+finden,"[""to find""]",goethe-a1-deck
+fliegen,"[""to fly"", ""fly""]",goethe-a1-deck
+fotografieren,"[""to take photos""]",goethe-a2-deck
+fragen,"[""to ask""]",goethe-a1-deck
+frühstücken,"[""to have breakfast""]",goethe-a1-deck
+geben,"[""to give""]",goethe-a1-deck
+geboren,"[""born""]",goethe-a1-deck
+gefallen,"[""to like""]",goethe-a1-deck
+gehen,"[""to work"", ""function""]",goethe-a1-deck
+gehören,"[""to belong"", ""to belong to""]",goethe-a1-deck
+geschlossen,"[""closed""]",goethe-a1-deck
+gestorben,"[""died""]",goethe-a1-deck
+gewinnen,"[""to win""]",goethe-a1-deck
+glauben,"[""to believe"", ""to think""]",goethe-a1-deck
+gratulieren,"[""to congratulate""]",goethe-a1-deck
+grillen,"[""to barbecue""]",goethe-a1-deck
+haben,"[""to have""]",goethe-a1-deck
+halten,"[""to stop"", ""to hold""]",goethe-a1-deck
+heiraten,"[""to marry""]",goethe-a1-deck
+heißen,"[""to be called""]",goethe-a1-deck
+helfen,"[""to help""]",goethe-a1-deck
+hinten,"[""at"", ""in the back""]",goethe-a1-deck
+holen,"[""to fetch"", ""pick up""]",goethe-a1-deck
+hören,"[""to listen"", ""to hear""]",goethe-a1-deck
+kaufen,"[""to buy""]",goethe-a1-deck
+kennen,"[""to know"", ""to know (so""]",goethe-a1-deck
+kochen,"[""to cook""]",goethe-a1-deck
+kommen,"[""to come""]",goethe-a1-deck
+kosten,"[""to cost""]",goethe-a1-deck
+kriegen,"[""to get""]",goethe-a1-deck
+können,"[""can""]",goethe-a2-deck
+lachen,"[""to laugh"", ""laugh""]",goethe-a1-deck
+laufen,"[""to walk"", ""run""]",goethe-a1-deck
+leben,"[""to live""]",goethe-a1-deck
+legen,"[""to put"", ""to lay""]",goethe-a1-deck
+lernen,"[""to learn""]",goethe-a1-deck
+lesen,"[""to read""]",goethe-a1-deck
+lieben,"[""to love""]",goethe-a1-deck
+liegen,"[""to lie"", ""be located""]",goethe-a1-deck
+machen,"[""to do"", ""to make""]",goethe-a1-deck
+mieten,"[""to rent""]",goethe-a1-deck
+mitbringen,"[""to get"", ""to bring along""]",goethe-a1-deck
+mitkommen,"[""to come with"", ""to come along""]",goethe-a1-deck
+mitmachen,"[""to join in"", ""to participate""]",goethe-a1-deck
+mitnehmen,"[""to take with"", ""to take (sth""]",goethe-a1-deck
+morgen,"[""tomorrow""]",goethe-a1-deck
+möchten,"[""would like to"", ""to want""]",goethe-a1-deck
+mögen,"[""to like""]",goethe-a1-deck
+müssen,"[""to have to"", ""have to""]",goethe-a1-deck
+nehmen,"[""to have (food"", ""drink)""]",goethe-a1-deck
+oben,"[""upstairs"", ""above""]",goethe-a1-deck
+offen,"[""open""]",goethe-a2-deck
+rauchen,"[""to smoke""]",goethe-a1-deck
+regnen,"[""to rain""]",goethe-a1-deck
+reisen,"[""to travel""]",goethe-a1-deck
+renovieren,"[""to renovate""]",goethe-a2-deck
+reparieren,"[""to repair""]",goethe-a1-deck
+reservieren,"[""to reserve""]",goethe-a2-deck
+riechen,"[""to smell""]",goethe-a1-deck
+sagen,"[""to say"", ""tell""]",goethe-a1-deck
+scheinen,"[""to shine"", ""seem to be""]",goethe-a1-deck
+schenken,"[""to give {gave""]",ding
+schicken,"[""to send""]",goethe-a1-deck
+schlafen,"[""to sleep""]",goethe-a1-deck
+schließen,"[""to close"", ""to conclude""]",goethe-a1-deck
+schmecken,"[""to taste""]",goethe-a1-deck
+schreiben,"[""to write""]",goethe-a1-deck
+schwimmen,"[""to swim""]",goethe-a1-deck
+sehen,"[""to see""]",goethe-a1-deck
+sitzen,"[""to sit""]",goethe-a1-deck
+sollen,"[""should"", ""shall""]",goethe-a1-deck
+spielen,"[""to play""]",goethe-a1-deck
+sprechen,"[""to speak""]",goethe-a1-deck
+stehen,"[""to be"", ""to stand""]",goethe-a1-deck
+stellen,"[""to put""]",goethe-a1-deck
+studieren,"[""to study""]",goethe-a1-deck
+suchen,"[""to look"", ""search for""]",goethe-a1-deck
+tanzen,"[""to dance""]",goethe-a1-deck
+telefonieren,"[""to telephone"", ""to phone""]",goethe-a1-deck
+treffen,"[""to afflict sb""]",ding
+trinken,"[""to drink""]",goethe-a1-deck
+trocken,"[""dry""]",goethe-a2-deck
+umziehen,"[""to move""]",goethe-a1-deck
+unten,"[""at the bottom"", ""downstairs""]",goethe-a1-deck
+unterschreiben,"[""to sign""]",goethe-a1-deck
+verboten,"[""forbidden""]",goethe-a1-deck
+verdienen,"[""to earn""]",goethe-a1-deck
+verkaufen,"[""to sell""]",goethe-a1-deck
+vermieten,"[""to rent out"", ""to rent sth""]",goethe-a1-deck
+verschieden,"[""different""]",goethe-a2-deck
+verstehen,"[""to understand""]",goethe-a1-deck
+vorstellen,"[""to launch sth""]",ding
+wandern,"[""to hike""]",goethe-a1-deck
+warten,"[""to wait""]",goethe-a1-deck
+waschen,"[""to wash""]",ding
+werden,"[""to become""]",goethe-a1-deck
+wiederholen,"[""to repeat""]",goethe-a1-deck
+willkommen,"[""welcome""]",goethe-a2-deck
+wissen,"[""to know""]",goethe-a1-deck
+wohnen,"[""to live"", ""to stay""]",goethe-a1-deck
+wollen,"[""to want""]",goethe-a1-deck
+wünschen,"[""to wish""]",goethe-a2-deck
+zahlen,"[""to pay""]",goethe-a1-deck
+zufrieden,"[""happy"", ""satisfied""]",goethe-a1-deck
+zusammen,"[""together""]",goethe-a1-deck
+Öl,"[""oil""]",goethe-a1-deck
+Übersetzung,"[""translation""]",goethe-a2-deck
+ändern,"[""to change""]",goethe-a2-deck
+öffnen,"[""to open""]",goethe-a1-deck
+übermorgen,"[""day after tomorrow""]",goethe-a2-deck
+übernachten,"[""to stay overnight"", ""to stay""]",goethe-a1-deck
+übersetzen,"[""to translate""]",goethe-a2-deck
+überweisen,"[""to transfer""]",goethe-a1-deck
