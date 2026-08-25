@@ -74,12 +74,17 @@ struct SummaryView: View {
     }
 
     private var headline: String {
-        misses.isEmpty ? "Nothing missed"
+        if store.cardsSeen == 0 { return "Nothing due" }
+        return misses.isEmpty
+            ? "Nothing missed"
             : "\(misses.count) word\(misses.count == 1 ? "" : "s") missed"
     }
 
     private var subline: String {
-        misses.isEmpty
+        if store.cardsSeen == 0 {
+            return "No cards are due today, and the daily budget is already spent."
+        }
+        return misses.isEmpty
             ? "All \(store.cardsSeen) answered on the first try."
             : "Only the misses are listed. \(store.cardsSeen) cards seen."
     }

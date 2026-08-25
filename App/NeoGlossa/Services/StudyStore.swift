@@ -104,9 +104,15 @@ final class StudyStore {
         )
         all.append(contentsOf: newRecords)
 
+        // Only the cards actually due today enter the queue. A new noun's
+        // recognition sibling is deliberately seeded a day out, so passing
+        // every freshly created card here would put both halves of the pair
+        // in the same session and defeat the introduction-day rule.
+        let newToday = newRecords.filter { $0.availability == .active && $0.due < endOfDay }
+
         let result = queueBuilder.build(
             due: dueRecords.map { $0.asCard() },
-            new: newRecords.map { $0.asCard() }
+            new: newToday.map { $0.asCard() }
         )
 
         // Map the ordered cards back onto their records.
@@ -123,7 +129,6 @@ final class StudyStore {
             }
         }
 
-        meta().markStudied(now, calendar: calendar)
         try? context.save()
     }
 
@@ -223,6 +228,9 @@ final class StudyStore {
         }
 
         position += 1
+        // The streak counts days actually studied, not days the Start button
+        // was tapped, so it is marked on the first answered card.
+        meta().markStudied(now, calendar: calendar)
         try? context.save()
         return position >= queue.count
     }
